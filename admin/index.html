@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="message">
+        <h2 id="alert"></h2>
+    </div>
+
+    <div id="main_message">
+        <h1 id="main_m2"></h1>
+    </div>
+
+    <div id="leader">
+        <div id="titles">
+            <h1 id="g" style="margin-left: 325px;margin-top: 150px">Group A</h1>
+            <h1 id="g" style="margin-left: 450px;margin-top: 150px">Group B</h1>
+            <h1 id="g" style="margin-left: 480px;margin-top: 150px">Group C</h1>
+        </div>
+    
+        <div id="names">
+    
+            <div id="group_a">  
+            </div>
+            <div id="group_b">
+            </div>
+            <div id="group_c">
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="timer">
+        <h2 id="t"></h2>
+    </div>
+
+    <div id="rates">
+        <div id="rate_a" class="rata"></div>
+        <div id="rate_b" class="rata"></div>
+        <div id="rate_c" class="rata"></div>
+        <div id="rate_d" class="rata"></div>
+    </div>
+
+    <button id="reset" onclick="window.location.reload()">
+        Return to main
+    </button>
+
+    <div id="buttons">
+        <button id="a" onmouseover="hover(this)" onmouseleave="leave(this)" onclick="send_answer('a',this)"></button>
+        <button id="b" onmouseover="hover(this)" onmouseleave="leave(this)" onclick="send_answer('b',this)"></button>
+        <button id="c" onmouseover="hover(this)" onmouseleave="leave(this)" onclick="send_answer('c',this)"></button>
+        <button id="d" onmouseover="hover(this)" onmouseleave="leave(this)" onclick="send_answer('d',this)"></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
