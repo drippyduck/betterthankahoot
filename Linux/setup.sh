@@ -1,2 +1,2 @@
-sudo apt install uvicorn
-pip install "fastapi[all]" websockets pandas xlsxwriter mysql-connector-python 
+sudo apt install uvicorn xterm
+pip install "fastapi[all]" openpyxl websockets pandas xlsxwriter mysql-connector-python 

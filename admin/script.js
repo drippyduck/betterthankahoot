@@ -1,3 +1,6 @@
+var domain='192.168.11.105'
+var domain="192.168.11.105";
+
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -96,7 +99,6 @@ var id;
 var s=false;
 var ans=0;
 var winner = '';
-var domain="192.168.11.105";
 var users = [];
 
 function sleep (time) {

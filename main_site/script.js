@@ -1,3 +1,4 @@
+var domain='192.168.11.105'
 if(!(navigator.userAgent.match(/firefox/i)))
 {
     //update_m2('Please use a firefox or safari browser!');
@@ -107,7 +108,6 @@ var group;
 var id;
 var s=false;
 var ans=0;
-var domain = `192.168.11.105`;
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
