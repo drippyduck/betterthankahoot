@@ -1,1 +1,0 @@
-CREATE TABLE `quiz`.`questions` (`id` INT NOT NULL AUTO_INCREMENT , `content` TEXT NOT NULL , `a` TEXT NOT NULL , `b` TEXT NOT NULL , `c` TEXT NOT NULL , `d` TEXT NOT NULL , `answer` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB; 
