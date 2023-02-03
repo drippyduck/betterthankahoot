@@ -2,10 +2,9 @@ var domain='192.168.11.105'
 
 if(!(navigator.userAgent.match(/firefox/i)))
 {
-    //update_m2('Please use a firefox or safari browser!');
-    //document.getElementById("main").style.display = "none";
-    //document.getElementById("main").style.top = "250%";
-    console.log(1);
+    update_m2('Please use a firefox or safari browser!');
+    document.getElementById("main").style.display = "none";
+    document.getElementById("main").style.top = "250%";
 }
 
 function sleep (time) {
@@ -129,6 +128,7 @@ async function start_timer()
     document.getElementById("t").innerText = `UP`;
     document.getElementById("timer").style.backgroundColor = "red";
     score=0;
+    selected=1;
     canAnswer = false;
 }
 
@@ -365,14 +365,3 @@ function get_question()
     }
 }
 
-
-
-function winSize() {
-    console.log(`
-Inner Width: ${this.innerWidth}
-Inner Height: ${this.innerHeight}
-Outer Width: ${this.outerWidth}
-Outer Height: ${this.outerHeight}
-`);}
-
-winSize();
