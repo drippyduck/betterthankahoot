@@ -37,7 +37,8 @@ def import_file(file):
             break
 
     for i in range(count):
-        insert_question(df['content'][i],df['a'][i],df['b'][i],df['c'][i],df['d'][i],df['answer'][i])
+        insert_question(df['content'][i].replace('"',"").replace("'",""),df['a'][i],df['b'][i],df['c'][i],df['d'][i],df['answer'][i])
+        
 
 def export_file(file):
     workbook = xlsxwriter.Workbook(f'{file}')
