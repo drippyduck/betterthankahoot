@@ -363,3 +363,15 @@ function get_question()
         document.getElementById("timer").style.opacity = "1";
     }
 }
+
+
+
+function winSize() {
+    console.log(`
+Inner Width: ${this.innerWidth}
+Inner Height: ${this.innerHeight}
+Outer Width: ${this.outerWidth}
+Outer Height: ${this.outerHeight}
+`);}
+
+winSize();

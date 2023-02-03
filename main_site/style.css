@@ -1,4 +1,4 @@
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 850px) {
 *
 {
     font-family: "Roboto Mono", sans-serif; 
@@ -59,14 +59,16 @@ body
 #message
 {
     position: absolute;
-    top: 30%;
-    left: 51%;
+    top: 23%;
+    left: 49%;
+    font-size: 1.5vh;
     transform: translate(-50%, -50%);
     opacity: 0;
     height: 100px;
-    width: 600px;
+    width: 50%;
     transition: .4s ease;
     text-align: center;
+    border: none;
 }
 
 #profile
@@ -82,7 +84,7 @@ body
     top: 120%;
     left: 52%;
     transform: translate(-50%, -50%);
-    margin-top: 100px;
+    margin-top: 150px;
     width: 750px;
     height: 500px;
     opacity: 0;
@@ -93,9 +95,9 @@ body
 {
     width: 200px;
     height: 100px;
-    scale: 1.5;
+    scale: 140%;
     margin-left: 100px;
-    margin-bottom: 60px;
+    margin-bottom: 6%;
     border: solid;
     border-color: black;
     border-radius: 15px;
