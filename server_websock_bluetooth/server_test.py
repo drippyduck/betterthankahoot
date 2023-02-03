@@ -179,6 +179,9 @@ def input_loop():
                 else:
                     print("Not ready!")
 
+    time.sleep(1)
+
+
 
 
 async def broadcast(message):

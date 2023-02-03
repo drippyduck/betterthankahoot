@@ -1,4 +1,5 @@
 var domain='192.168.11.105'
+
 if(!(navigator.userAgent.match(/firefox/i)))
 {
     //update_m2('Please use a firefox or safari browser!');

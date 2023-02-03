@@ -1,5 +1,4 @@
 var domain='192.168.11.105'
-var domain="192.168.11.105";
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
