@@ -59,6 +59,9 @@ app.add_middleware(
 def get_group():
     global groups
 
+    if groups["a"] == 0 and groups["b"] == 0 and groups["c"] == 0:
+        return "n"
+
     while True:
         d = random.choice(list(groups.keys()))
         if groups[d] != 0:

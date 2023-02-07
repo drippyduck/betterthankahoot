@@ -1,112 +1,14 @@
+@media only screen and (min-width: 850px) {
 *
 {
     font-family: "Roboto Mono", sans-serif; 
     transition: .25s ease;
+    box-sizing: border-box;
 }
 
-body
+.g
 {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-#main
-{
-    position: absolute;
-    display: grid;
-    border: solid;
-    border-color: black;
-    border-radius: 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0px 40px 40px 40px;
-    transition: .5s ease;
-}
-
-#main_title
-{
-    padding-bottom: 5px;
-}
-
-#main_input
-{
-    margin-bottom: 15px;
-    width: 200px;
-    height: 30px;
-    border-radius: 15px;
-    border-color: black;
-    border-width: 4px;
-    text-align: center;
-}
-
-#main_button
-{
-    width: 100px;
-    margin-left: 55px;
-    border-radius: 15px;
-    height: 40px;
-    border-color: black;
-    background-color: yellow;
-    border-width: 4px;
-    margin-top: 5px;
-}
-
-#message
-{
-    position: absolute;
-    top: 30%;
-    left: 51%;
-    transform: translate(-50%, -50%);
-    opacity: 1;
-    height: 100px;
-    width: 600px;
-    transition: .4s ease;
-    text-align: center;
-}
-
-#profile
-{
-    opacity: 0;
-    position: absolute;
-    left: 80%;
-}
-
-#buttons
-{
-    position: absolute;
-    top: 120%;
-    left: 52%;
-    transform: translate(-50%, -50%);
-    margin-top: 100px;
-    width: 750px;
-    height: 500px;
-    opacity: 0;
-}
-
-#buttons button
-{
-    width: 200px;
-    height: 100px;
-    scale: 1.5;
-    margin-left: 100px;
-    margin-bottom: 60px;
-    border: solid;
-    border-color: black;
-    border-radius: 15px;
-}
-
-#main_message
-{
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px;
-    height: 250px;
-    text-align: center;
-    opacity: 1;
+    margin-top: 8%;
 }
 
 #leader
@@ -119,72 +21,12 @@ body
     margin-top: 10%;
 }
 
-#a
-{
-    background-color: red;
-}
-
-#b
-{
-    background-color: blue;
-}
-
-#c
-{
-    background-color: yellow;
-}
-
-#d
-{
-    background-color: green;
-}
-
-#timer
-{
-    border: solid;
-    border-color: black;
-    position: absolute;
-    top: 7%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 15px;
-    width: 100px;
-    height: 70px;
-    text-align: center;
-    vertical-align: middle;
-    background-color: lightblue;
-    opacity: 0;
-}
-
-#reset
-{
-    border-radius: 200px;
-    width: 160px;
-    height: 30px;
-    text-align: center;
-    vertical-align: middle;
-    border: solid;
-    position: absolute;
-    background-color: yellow;
-    top: 1%;
-}
-
-#reset:hover
-{
-    cursor: pointer;
-}
-
-#main_button:hover
-{
-    cursor: pointer;
-}
-
 #names
 {
     display: flex;
     position: absolute;
-    width: 1800px;
-    height: 600px;
+    width: 95%;
+    height: 72%;
     top: 25%;
     left: 5%;
 }
@@ -256,8 +98,8 @@ body
 #rates
 {
     position: absolute;
-    width: 1000px;
-    height: 600px;
+    width: 10%;
+    height: 50%;
     top: 20%;
     left: 25%;
     opacity: 0;
@@ -301,4 +143,181 @@ body
 {
     background-color: green;
     width: 12%;
+}
+
+
+body
+{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#main
+{
+    position: absolute;
+    display: grid;
+    border: solid;
+    border-color: black;
+    border-radius: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0px 40px 40px 40px;
+    transition: 1.2s ease;
+}
+
+#main_title
+{
+    padding-bottom: 5px;
+}
+
+#main_input
+{
+    margin-bottom: 15px;
+    width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    border-color: black;
+    border-width: 4px;
+    text-align: center;
+}
+
+#main_button
+{
+    width: 100px;
+    margin-left: 55px;
+    border-radius: 15px;
+    height: 40px;
+    border-color: black;
+    background-color: yellow;
+    border-width: 4px;
+    margin-top: 5px;
+}
+
+#message
+{
+    position: absolute;
+    top: 23%;
+    left: 49%;
+    font-size: 1.5vh;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    height: 100px;
+    width: 50%;
+    transition: .4s ease;
+    text-align: center;
+    border: none;
+}
+
+#profile
+{
+    opacity: 0;
+    position: absolute;
+    left: 80%;
+}
+
+#buttons
+{
+    position: absolute;
+    top: 120%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    margin-top: 150px;
+    width: 750px;
+    height: 500px;
+    opacity: 0;
+}
+
+
+#buttons button
+{
+    width: 200px;
+    height: 100px;
+    scale: 140%;
+    margin-left: 100px;
+    margin-bottom: 6%;
+    border: solid;
+    border-color: black;
+    border-radius: 15px;
+}
+
+
+#main_message
+{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 250px;
+    text-align: center;
+    opacity: 1;
+}
+
+#main_m2
+{
+    margin-top: 10%;
+}
+
+#a
+{
+    background-color: red;
+}
+
+#b
+{
+    background-color: blue;
+}
+
+#c
+{
+    background-color: yellow;
+}
+
+#d
+{
+    background-color: green;
+}
+
+#timer
+{
+    border: solid;
+    border-color: black;
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    width: 100px;
+    height: 70px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: lightblue;
+    opacity: 0;
+}
+
+#reset
+{
+    border-radius: 200px;
+    width: 160px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    border: solid;
+    position: absolute;
+    background-color: yellow;
+    top: 1%;
+}
+
+#reset:hover
+{
+    cursor: pointer;
+}
+
+#main_button:hover
+{
+    cursor: pointer;
+}
 }

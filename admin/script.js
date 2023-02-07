@@ -268,10 +268,10 @@ function show_rate()
 	   total = 1;
 	}
 	
-        a = (t.a*100)/total;
-        b = (t.b*100)/total;
-        c = (t.c*100)/total;
-        d = (t.d*100)/total;
+        a = Math.trunc((t.a*100)/total);
+        b = Math.trunc((t.b*100)/total);
+        c = Math.trunc((t.c*100)/total);
+        d = Math.trunc((t.d*100)/total);
 	
 	//alert(`total: ${total} a ${t.a} b ${t.b} c ${t.c} d ${t.d}`);
 	    

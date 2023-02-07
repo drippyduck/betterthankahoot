@@ -239,6 +239,14 @@ function get_profile()
         group=txt.group;
         id=txt.id;
 
+        if(group==="n")
+        {
+            update_m2('Lobby is full, please wait then try again...');
+            document.getElementById("main").style.display = "none";
+            document.getElementById("main").style.top = "250%";
+            return;
+        }
+
         if(selected!=0)
         {
             if(score!=last_score)
