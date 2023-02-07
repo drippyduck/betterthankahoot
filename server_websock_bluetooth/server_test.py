@@ -194,6 +194,9 @@ async def broadcast(message):
         except websockets.ConnectionClosed:
             pass
 
+    if basic["command"] == "start":
+        requests.get(f"http://{domain}:8000/api/startTimer")
+
     WORD=''
 
 async def handler(websocket):

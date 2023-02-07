@@ -7,6 +7,8 @@ import uuid
 import pandas as pd
 import xlsxwriter
 import mysql.connector
+import time
+import asyncio
 
 mydb = mysql.connector.connect(host="localhost",user="root",password="")
 
@@ -45,6 +47,7 @@ groups = {
 ids = {}
 
 id=1
+stat=0
 
 app = FastAPI()
 
@@ -72,6 +75,17 @@ def get_group():
 @app.get("/")
 async def root():
     return {"message": "Hello"}
+
+@app.get("/api/startTimer")
+async def start_timer():
+    global stat
+    
+    for i in range(10):
+        stat=10-i
+        await asyncio.sleep(1)
+
+    stat=0
+    return {"success":"true"}
 
 @app.get("/api/getRows")
 async def get_rows():
@@ -193,6 +207,7 @@ async def get_winner(group: str):
 @app.post("/api/submitAnswer")
 async def send_answer(request: Request):
     global rates
+    global stat
     
     j = await request.json()
     
@@ -200,7 +215,7 @@ async def send_answer(request: Request):
     mycursor.execute(f"SELECT answer FROM questions WHERE id = {q};")
 
     if j["answer"] == mycursor.fetchone()[0]:
-        ids[j["sessionID"]]["score"] += int(j["score"])
+        ids[j["sessionID"]]["score"] += int(stat*100)
 
     if j["answer"] == "a":
         rates["a"] += 1

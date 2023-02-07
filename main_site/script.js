@@ -314,7 +314,7 @@ function send_answer(a,obj)
 
     xhr = new XMLHttpRequest();
     xhr.open("POST", `http://${domain}:8000/api/submitAnswer`, true);
-    xhr.send(`{"question":"${question}", "answer":"${a}", "score":"${score}", "sessionID":"${value}"}`);
+    xhr.send(`{"question":"${question}", "answer":"${a}", "sessionID":"${value}"}`);
 
     canAnswer=false;
 }
