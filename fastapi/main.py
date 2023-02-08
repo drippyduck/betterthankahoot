@@ -10,6 +10,18 @@ import mysql.connector
 import time
 import asyncio
 
+valid = ["1","2","3","4","5","6","7","8","9"]
+
+def sanitize(word):
+    
+    s=""
+
+    for elem in word.replace(" ",""):
+        if elem.strip() in valid:
+            s+=elem.strip()
+
+    return s
+
 mydb = mysql.connector.connect(host="localhost",user="root",password="")
 
 mycursor = mydb.cursor()
@@ -17,7 +29,8 @@ mycursor = mydb.cursor()
 mycursor.execute("USE quiz;")
 
 def get_question(id):
-    mycursor.execute(f"SELECT * FROM questions WHERE id = {id};")
+    mycursor.execute(f"SELECT * FROM questions WHERE id = {sanitize(id)};")
+    print(id)
     res = mycursor.fetchone()
     j = {"content":res[1],"a":res[2],"b":res[3],"c":res[4],"d":res[5]}
     return j
@@ -111,7 +124,7 @@ async def send_test(request: Request):
 
 
 @app.get("/api/getQuestion")
-async def send_quest(id: int):
+async def send_quest(id: str):
     global rates
     rates = {"a": 0,"b": 0,"c": 0,"d": 0}
     return get_question(id)
@@ -163,18 +176,6 @@ async def get_rate(group: str):
             l[id] = {"name":name,"score":score}
 
     return sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
-
-
-
-@app.get("/api/changeGroup")
-async def change_grp(id: str):
-    global ids
-
-    for key in ids:
-        if ids[key]["id"] == id:
-            ids[key]["group"] = "d"
-
-    return {"success":"true"}
 
 
 @app.get("/api/getWinner")
