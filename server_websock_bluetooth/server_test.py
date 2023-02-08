@@ -180,10 +180,6 @@ def input_loop():
                     print("Not ready!")
 
                     
-
-
-
-
 async def broadcast(message):
     global WORD
     global basic

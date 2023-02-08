@@ -1,8 +1,8 @@
 import websockets, threading, asyncio
 from queue import Queue
 import random, sys, requests, os, json, time
-import bluetooth
 from subprocess import call
+import bluetooth
 
 q = Queue()
 
@@ -12,7 +12,7 @@ count = 0
 ready=False
 sent=False
 index = 0
-question_per_round = 1
+question_per_round = 5
 final_q = 1
 GROUPS = ["a","d"]
 domain=sys.argv[1]
@@ -68,7 +68,6 @@ def add_question(r):
             q.put(elem)
             questions.append(elem)
             i+=1
-
 def input_loop():
     global WORD
     global basic
@@ -210,9 +209,8 @@ def input_loop():
 
                 else:
                     print("Not ready!")
-
-
-
+                    
+                                    
 async def broadcast(message):
     global WORD
     global basic
@@ -222,6 +220,9 @@ async def broadcast(message):
             await websocket.send(message)
         except websockets.ConnectionClosed:
             pass
+
+    if basic["command"] == "start":
+        requests.get(f"http://{domain}:8000/api/startTimer")
 
     WORD=''
 
