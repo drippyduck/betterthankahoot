@@ -1,5 +1,5 @@
 var domain='192.168.11.105';
-var ws;
+const ws = new WebSocket(`ws://${domain}:5555`);
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -130,8 +130,6 @@ async function start_timer()
 
 function connect_all()
 {
-    ws = new WebSocket(`ws://${domain}:5555`);
-
     ws.addEventListener("open", async () =>{
         //document.getElementById("socket").innerHTML = "<h1>Connected</h1>";
         await update_m2("Waiting to start");
