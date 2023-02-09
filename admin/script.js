@@ -1,4 +1,5 @@
-var domain='192.168.11.105'
+var domain='192.168.11.105';
+var ws;
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -129,7 +130,7 @@ async function start_timer()
 
 function connect_all()
 {
-    const ws = new WebSocket(`ws://${domain}:5555`);
+    ws = new WebSocket(`ws://${domain}:5555`);
 
     ws.addEventListener("open", async () =>{
         //document.getElementById("socket").innerHTML = "<h1>Connected</h1>";
@@ -449,6 +450,16 @@ function leave(obj)
             border-width: 3px;
         `
     }
+}
+
+function reset()
+{
+    if(ws.readyState !== WebSocket.CLOSED)
+    {
+        ws.close();
+    }
+    
+    window.location.reload();
 }
 
 connect_all();

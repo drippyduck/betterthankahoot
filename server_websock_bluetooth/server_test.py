@@ -211,6 +211,11 @@ async def handler(websocket):
     except:
         CLIENTS.remove(websocket)
 
+        basic["command"] = "new"
+        basic["count"] = len(CLIENTS)
+
+        WORD=str(basic)
+
 async def full():
     while True:
         await asyncio.sleep(1)
