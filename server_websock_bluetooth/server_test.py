@@ -9,6 +9,7 @@ WORD = ''
 count = 0
 ready=False
 sent=False
+answered=False
 index = 0
 question_per_round = 5
 final_q = 1
@@ -35,6 +36,7 @@ def reset():
     global GROUPS
     global q
     global questions
+    global answered
 
     requests.get(f"http://{domain}:8000/api/getReset")
                     
@@ -100,6 +102,8 @@ def input_loop():
                     add_question(question_per_round)
 
                 ready=True
+                answered=True
+
             else:
                 basic["command"] = "ready"
                 basic["group"] = GROUPS[index]
@@ -116,7 +120,7 @@ def input_loop():
 
         else:
             if ready:
-                if c == "1":
+                if c == "1" and answered:
                     if not q.empty():
 
                         basic["command"] = "go"
@@ -166,7 +170,7 @@ def input_loop():
                     WORD=str(basic)
 
 
-                elif c == "5":
+                elif c == "5" and not answered:
 
                     if not sent:
                         print("Question not sent!")
@@ -175,6 +179,7 @@ def input_loop():
                         basic["group"] = GROUPS[index]
                         WORD=str(basic)
                         sent=False
+                        answered=True
 
                 else:
                     print("Not ready!")
