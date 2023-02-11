@@ -9,7 +9,7 @@ WORD = ''
 count = 0
 ready=False
 sent=False
-answered=False
+answered=True
 index = 0
 question_per_round = 5
 final_q = 1
@@ -79,13 +79,13 @@ def input_loop():
     global index
     global question_per_round
     global GROUPS
-    
+    global answered
 
     while True:
         print("0: Ready\n1: Send question / Get winners \n2:Show board\n4: Reset\n5: Start")
         c=input(">> ")
 
-        if c == "0":
+        if c == "0" and not ready:
 
             if index >= len(GROUPS):
                 reset()
@@ -129,6 +129,7 @@ def input_loop():
                         WORD=str(basic)
 
                         sent=True
+                        answered=False
 
                     else:
                         try:
@@ -178,6 +179,9 @@ def input_loop():
                         basic["command"] = "start"
                         basic["group"] = GROUPS[index]
                         WORD=str(basic)
+
+                        time.sleep(1)
+                        requests.get(f"http://{domain}:8000/api/startTimer")
                         sent=False
                         answered=True
 
@@ -194,10 +198,7 @@ async def broadcast(message):
             await websocket.send(message)
         except websockets.ConnectionClosed:
             pass
-
-    if basic["command"] == "start":
-        requests.get(f"http://{domain}:8000/api/startTimer")
-
+        
     WORD=''
 
 async def handler(websocket):
@@ -225,6 +226,7 @@ async def full():
     while True:
         await asyncio.sleep(1)
         await broadcast(WORD)
+
 
 
 async def main():

@@ -22,7 +22,7 @@ def sanitize(word):
 
     return s
 
-mydb = mysql.connector.connect(host="localhost",user="root",password="")
+mydb = mysql.connector.connect(host="localhost",user="root",password="root")
 
 mycursor = mydb.cursor()
 
