@@ -1,8 +1,8 @@
 import websockets, threading, asyncio
 from queue import Queue
 import random, sys, requests, os, json, time
-from subprocess import call
 import bluetooth
+from subprocess import call
 
 q = Queue()
 
@@ -68,6 +68,7 @@ def add_question(r):
             q.put(elem)
             questions.append(elem)
             i+=1
+
 def input_loop():
     global WORD
     global basic
@@ -209,8 +210,8 @@ def input_loop():
 
                 else:
                     print("Not ready!")
+
                     
-                                    
 async def broadcast(message):
     global WORD
     global basic
@@ -241,6 +242,11 @@ async def handler(websocket):
         await websocket.wait_closed()
     except:
         CLIENTS.remove(websocket)
+
+        basic["command"] = "new"
+        basic["count"] = len(CLIENTS)
+
+        WORD=str(basic)
 
 async def full():
     while True:
