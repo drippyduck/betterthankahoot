@@ -22,7 +22,7 @@ def sanitize(word):
 
     return s
 
-mydb = mysql.connector.connect(host="localhost",user="root",password="root")
+mydb = mysql.connector.connect(host="localhost",user="root",password="")
 
 mycursor = mydb.cursor()
 
@@ -216,7 +216,10 @@ async def send_answer(request: Request):
     mycursor.execute(f"SELECT answer FROM questions WHERE id = {q};")
 
     if j["answer"] == mycursor.fetchone()[0]:
-        ids[j["sessionID"]]["score"] += int(stat*100)
+        if int(stat)!=10:
+            ids[j["sessionID"]]["score"] += int(stat*100)-100
+        else:
+            ids[j["sessionID"]]["score"] += int(stat*100)
 
     if j["answer"] == "a":
         rates["a"] += 1

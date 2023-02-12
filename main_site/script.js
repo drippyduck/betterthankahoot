@@ -1,10 +1,10 @@
-var domain='192.168.11.107'
+var domain='192.168.11.105'
 
 if(!(navigator.userAgent.match(/firefox/i)))
 {
-    update_m2('Please use a firefox or safari browser!');
-    document.getElementById("main").style.display = "none";
-    document.getElementById("main").style.top = "250%";
+    //update_m2('Please use a firefox or safari browser!');
+    //document.getElementById("main").style.display = "none";
+    //document.getElementById("main").style.top = "250%";
 }
 
 function sleep (time) {
@@ -144,7 +144,7 @@ function connect_all()
             const myObj = JSON.parse(resp);
             var name = myObj.cookie_name;
             var value = myObj.value;
-            document.cookie = `${name}=${value};SameSite=None`
+            document.cookie = `${name}=${value};SameSite=Secure`
     }
 
     const ws = new WebSocket(`ws://${domain}:5555`);
