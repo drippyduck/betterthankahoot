@@ -1,4 +1,4 @@
-var domain='192.168.11.105'
+var domain='192.168.11.110'
 const ws = new WebSocket(`ws://${domain}:5555`);
 
 function sleep (time) {
@@ -279,10 +279,10 @@ function show_rate()
         document.getElementById("rate_c").innerHTML = `<h1>${c}%</h1>`;
         document.getElementById("rate_d").innerHTML = `<h1>${d}%</h1>`;
 
-        document.getElementById("rate_a").style.width = `${a+10}%`;
-        document.getElementById("rate_b").style.width = `${b+10}%`;
-        document.getElementById("rate_c").style.width = `${c+10}%`;
-        document.getElementById("rate_d").style.width = `${d+10}%`;
+        document.getElementById("rate_a").style.width = `${(a*3)+43}%`;
+        document.getElementById("rate_b").style.width = `${(b*3)+43}%`;
+        document.getElementById("rate_c").style.width = `${(c*3)+43}%`;
+        document.getElementById("rate_d").style.width = `${(d*3)+43}%`;
 
         document.getElementById("message").style.opacity = "0";
         document.getElementById("rates").style.opacity = "1";
@@ -300,7 +300,7 @@ function show_board()
 
         document.getElementById("leader").style.opacity = "0";
 
-        var elem = ["message","buttons","timer","leader"];
+        var elem = ["message","buttons","timer","leader","rates"];
         var elems2  = [];
 
         elem.forEach(function(dv)
@@ -332,7 +332,12 @@ function show_board()
 
         for (let step = 0; step < s; step++) 
         {
-            document.getElementById("board").innerHTML += `<h1 id="ranki">${step+1} : ${l[step][1].name} Score: ${l[step][1].score}</h1>`;
+            var values = Object.values(l[step][1]);
+
+            var name = values[0];
+            var score = values[1];
+
+            document.getElementById("board").innerHTML += `<h1 id="ranki">${step+1} : ${name} Score: ${score}</h1>`;
 
         }
 
@@ -395,7 +400,12 @@ function show_board_final()
 
         for (let step = 0; step < s; step++) 
         {
-            document.getElementById("board").innerHTML += `<h1 id="ranki">${step+1} : ${l[step][1].name} Score: ${l[step][1].score}</h1>`;
+            var values = Object.values(l[step][1]);
+
+            var name = values[0];
+            var score = values[1];
+
+            document.getElementById("board").innerHTML += `<h1 id="ranki">${step+1} : ${name} Score: ${score}</h1>`;
 
         }
 

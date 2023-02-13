@@ -103,6 +103,7 @@
     top: 20%;
     left: 25%;
     opacity: 0;
+    scale: 1.3;
 }
 
 .rata
@@ -124,7 +125,7 @@
 #rate_a
 {
     background-color: red;
-    width: 25%;
+    width: 43%;
 }
 
 #rate_b
@@ -136,13 +137,13 @@
 #rate_c
 {
     background-color: yellow;
-    width: 10%;
+    width: 43%;
 }
 
 #rate_d
 {
     background-color: green;
-    width: 12%;
+    width: 43%;
 }
 
 
