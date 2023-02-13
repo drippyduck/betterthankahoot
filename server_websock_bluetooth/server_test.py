@@ -197,7 +197,14 @@ async def broadcast(message):
         try:
             await websocket.send(message)
         except websockets.ConnectionClosed:
-            pass
+            CLIENTS.remove(websocket)
+
+            basic["command"] = "new"
+            basic["count"] = len(CLIENTS)
+
+            WORD=str(basic)
+
+            await broadcast(WORD)
         
     WORD=''
 

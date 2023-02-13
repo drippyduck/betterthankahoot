@@ -424,6 +424,10 @@ function show_names(c)
     xhr.onload = function(){
         var l = JSON.parse(xhr.responseText);
 
+        document.getElementById(`group_a`).innerHTML = ``;
+        document.getElementById(`group_b`).innerHTML = ``;
+        document.getElementById(`group_c`).innerHTML = ``;
+
         for (let step = 0; step < c-1; step++) 
         {
             n = l[`${step}`].name;

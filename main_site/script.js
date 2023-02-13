@@ -1,4 +1,5 @@
 var domain='192.168.11.110'
+var ws;
 
 if(!(navigator.userAgent.match(/firefox/i)))
 {
@@ -147,7 +148,7 @@ function connect_all()
             document.cookie = `${name}=${value};SameSite=Secure`
     }
 
-    const ws = new WebSocket(`ws://${domain}:5555`);
+    ws = new WebSocket(`ws://${domain}:5555`);
 
     ws.addEventListener("open", async () =>{
         //document.getElementById("socket").innerHTML = "<h1>Connected</h1>";
@@ -373,3 +374,30 @@ function get_question()
     }
 }
 
+async function reset()
+{
+    if (ws.readyState !== WebSocket.CLOSED) {
+        xhr = new XMLHttpRequest();
+        const value = ('; '+document.cookie).split(`; sessionID=`).pop().split(';')[0];
+        xhr.open("POST", `http://${domain}:8000/api/disconnect`, true);
+        xhr.send(`{"sessionID":"${value}"}`);
+        ws.close();
+    }
+
+    await sleep(1000);
+
+    window.location.reload();
+}
+
+window.onbeforeunload = async function (e) {
+    if (ws.readyState !== WebSocket.CLOSED) {
+        xhr = new XMLHttpRequest();
+        const value = ('; '+document.cookie).split(`; sessionID=`).pop().split(';')[0];
+        xhr.open("POST", `http://${domain}:8000/api/disconnect`, true);
+        xhr.send(`{"sessionID":"${value}"}`);
+        ws.close();
+    }
+
+    await sleep(1000);
+
+  };

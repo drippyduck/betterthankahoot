@@ -232,6 +232,21 @@ async def send_answer(request: Request):
 
     return {"success":"true"}
 
+@app.post("/api/disconnect")
+async def disconnect(request: Request):
+    global rates
+    global stat
+    
+    j = await request.json()
+    
+    q = j["sessionID"]
+
+    for elem in ids.copy():
+        if elem == q:
+            del ids[elem]
+
+    return {"success":"true"}
+
 @app.get("/api/getUser")
 async def get_user(id: str):
     for key in ids:
