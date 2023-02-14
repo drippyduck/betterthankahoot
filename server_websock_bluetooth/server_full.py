@@ -11,6 +11,7 @@ WORD = ''
 count = 0
 ready=False
 sent=False
+answered=True
 index = 0
 question_per_round = 5
 final_q = 1
@@ -37,14 +38,16 @@ def reset():
     global GROUPS
     global q
     global questions
+    global answered
 
     requests.get(f"http://{domain}:8000/api/getReset")
                     
     ready=False
     sent=False
+    answered=True
     count=0
-    CLIENTS=CLIENTS.clear()
-    CLIENTS=set()
+    basic["command"] = "close"
+    WORD=str(basic)
     basic = {
         "command":"",
         "question":""
@@ -115,7 +118,7 @@ def input_loop():
             server_sock.close()
             exit(-1)
 
-        if c == "0":
+        if c == "0" and not ready:
 
             if index >= len(GROUPS):
                 reset()
@@ -132,6 +135,8 @@ def input_loop():
                     add_question(question_per_round)
 
                 ready=True
+                answered=True
+
             else:
                 basic["command"] = "ready"
                 basic["group"] = GROUPS[index]
@@ -148,7 +153,7 @@ def input_loop():
 
         else:
             if ready:
-                if c == "1":
+                if c == "1" and answered:
                     if not q.empty():
 
                         basic["command"] = "go"
@@ -157,6 +162,7 @@ def input_loop():
                         WORD=str(basic)
 
                         sent=True
+                        answered=False
 
                     else:
                         try:
@@ -198,7 +204,7 @@ def input_loop():
                     WORD=str(basic)
 
 
-                elif c == "5":
+                elif c == "5" and not answered:
 
                     if not sent:
                         print("Question not sent!")
@@ -206,7 +212,11 @@ def input_loop():
                         basic["command"] = "start"
                         basic["group"] = GROUPS[index]
                         WORD=str(basic)
+
+                        time.sleep(1)
+                        requests.get(f"http://{domain}:8000/api/startTimer")
                         sent=False
+                        answered=True
 
                 else:
                     print("Not ready!")
@@ -220,11 +230,15 @@ async def broadcast(message):
         try:
             await websocket.send(message)
         except websockets.ConnectionClosed:
-            pass
+            CLIENTS.remove(websocket)
 
-    if basic["command"] == "start":
-        requests.get(f"http://{domain}:8000/api/startTimer")
+            basic["command"] = "new"
+            basic["count"] = len(CLIENTS)
 
+            WORD=str(basic)
+
+            await broadcast(WORD)
+        
     WORD=''
 
 async def handler(websocket):
@@ -252,6 +266,7 @@ async def full():
     while True:
         await asyncio.sleep(1)
         await broadcast(WORD)
+
 
 
 async def main():

@@ -1,4 +1,4 @@
-var domain='192.168.11.110'
+var domain='10.214.93.207'
 const ws = new WebSocket(`ws://${domain}:5555`);
 
 function sleep (time) {

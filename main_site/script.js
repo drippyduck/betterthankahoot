@@ -1,4 +1,4 @@
-var domain='192.168.11.110'
+var domain='10.214.93.207'
 var ws;
 
 if(!(navigator.userAgent.match(/firefox/i)))
@@ -53,23 +53,19 @@ async function update_alert(message)
 
     if(l<=100)
     {
-        document.getElementById("alert").style.fontSize = "180%";
-        document.getElementById("alert").style.cssText += "font-size: 2.5vh;";
+        document.getElementById("alert").style.cssText = "font-size: 180%;font-size: 2.5vh;";
     }
     else if(l<=200)
     {
-        document.getElementById("alert").style.fontSize = "145%";
-        document.getElementById("alert").style.cssText += "font-size: 2.5vh;";
+        document.getElementById("alert").style.cssText = "font-size: 145%;font-size: 2.5vh;";
     }
     else if(l<=300)
     {
-        document.getElementById("alert").style.fontSize = "115%";
-        document.getElementById("alert").style.cssText += "font-size: 3vh;";
+        document.getElementById("alert").style.cssText = "font-size: 115%;font-size: 3vh;";
     }
     else
     {
-        document.getElementById("alert").style.fontSize = "75%";
-        document.getElementById("alert").style.cssText += "font-size: 3.5vh;";
+        document.getElementById("alert").style.cssText = "font-size: 75%;font-size: 3.5vh;";
     } 
 
     await sleep(500);
@@ -355,7 +351,7 @@ function hover(obj)
     if(!s)
     {
         document.getElementById(obj.id).style.cssText = `
-            border-color: cyan;
+            border-color: black;
             border-width: 5px;
         `
     }
@@ -367,7 +363,7 @@ function leave(obj)
     {
         document.getElementById(obj.id).style.cssText = `
             border-color: black;
-            border-width: 3px;
+            border-width: 0px;
         `
     }
 }
