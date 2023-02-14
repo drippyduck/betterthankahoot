@@ -53,16 +53,25 @@ async function update_alert(message)
 
     if(l<=100)
     {
-        document.getElementById("alert").style.fontSize = "190%";
+        document.getElementById("alert").style.fontSize = "180%";
+        document.getElementById("alert").style.cssText += "font-size: 2.5vh;";
     }
     else if(l<=200)
     {
         document.getElementById("alert").style.fontSize = "145%";
+        document.getElementById("alert").style.cssText += "font-size: 2.5vh;";
     }
     else if(l<=300)
     {
         document.getElementById("alert").style.fontSize = "115%";
+        document.getElementById("alert").style.cssText += "font-size: 3vh;";
     }
+    else
+    {
+        document.getElementById("alert").style.fontSize = "75%";
+        document.getElementById("alert").style.cssText += "font-size: 3.5vh;";
+    } 
+
     await sleep(500);
 
     document.getElementById("message").style.opacity = "1";
