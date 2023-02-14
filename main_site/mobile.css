@@ -17,7 +17,7 @@
 
 *
 {
-    font-family: "Roboto Mono", sans-serif; 
+    font-family: 'Montserrat', sans-serif;
     transition: .25s ease;
     box-sizing: border-box;
 }
@@ -32,6 +32,7 @@ body
 
 #main
 {
+    scale: 0.7;
     position: absolute;
     display: grid;
     border: solid;
@@ -39,37 +40,48 @@ body
     border-radius: 40px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    opacity: 1;
+    transform: translate(-70%, -50%);
     padding: 0px 40px 40px 40px;
     transition: 1.2s ease;
+    border-width: 5px;
+    background-color: rgb(45, 45, 165);
 }
 
 #main_title
 {
-    padding-bottom: 5px;
+    margin-left: 18%;
+    padding-bottom: 15px;
+    font-size: 64px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: underline;
 }
 
 #main_input
 {
+    margin-left: 2%;
     margin-bottom: 15px;
-    width: 200px;
-    height: 30px;
-    border-radius: 15px;
+    width: 350px;
+    height: 50px;
+    border-radius: 5px;
     border-color: black;
-    border-width: 4px;
     text-align: center;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 #main_button
 {
-    width: 100px;
-    margin-left: 55px;
-    border-radius: 15px;
+    width: 200px;
+    margin-left: 25%;
+    border-radius: 5px;
     height: 40px;
     border-color: black;
-    background-color: yellow;
-    border-width: 4px;
+    background-color: hsl(233deg 36% 38%);
+    color: white;
     margin-top: 5px;
+    border-width: 2px;
+    border-color: white;
 }
 
 #message
@@ -78,17 +90,11 @@ body
     top: 27%;
     left: 51%;
     transform: translate(-50%, -50%);
-    opacity: 0;
+    opacity: 1;
     width: 70%;
     transition: .4s ease;
     text-align: center;
-    font-size: 10px;
     margin-top: 25px;
-}
-
-#alert
-{
-    font-size: 100%;
 }
 
 #profile
@@ -159,8 +165,8 @@ body
     margin-top: 80px;
     transform: translate(-50%, -50%);
     border-radius: 15px;
-    width: 10vh;
-    height: 70px;
+    width: 7vh;
+    height: 65px;
     text-align: center;
     vertical-align: middle;
     background-color: lightblue;

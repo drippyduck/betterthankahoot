@@ -42,6 +42,7 @@ def reset():
                     
     ready=False
     sent=False
+    answered=True
     count=0
     CLIENTS=CLIENTS.clear()
     CLIENTS=set()

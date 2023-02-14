@@ -48,7 +48,23 @@ async function update_alert(message)
     document.getElementById("message").style.opacity = "0";
     await sleep(500);
     document.getElementById("alert").innerText = `${message}`;
+
+    var l = parseInt(document.getElementById("alert").innerText.length);
+
+    if(l<=100)
+    {
+        document.getElementById("alert").style.fontSize = "190%";
+    }
+    else if(l<=200)
+    {
+        document.getElementById("alert").style.fontSize = "145%";
+    }
+    else if(l<=300)
+    {
+        document.getElementById("alert").style.fontSize = "115%";
+    }
     await sleep(500);
+
     document.getElementById("message").style.opacity = "1";
 }
 
