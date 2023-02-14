@@ -8,6 +8,7 @@
     left: 37%;
     top: 10%;
     margin-top: 5px;
+    border-width: 0px;
     margin-bottom: 20px;
     border: solid;
     border-color: black;
@@ -38,10 +39,10 @@ body
     border: solid;
     border-color: black;
     border-radius: 40px;
-    top: 50%;
-    left: 50%;
+    top: 35%;
+    left: 40%;
     opacity: 1;
-    transform: translate(-70%, -50%);
+    transform: translate(-50%, -50%);
     padding: 0px 40px 40px 40px;
     transition: 1.2s ease;
     border-width: 5px;

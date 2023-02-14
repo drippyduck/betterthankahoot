@@ -243,6 +243,9 @@ function connect_all()
             
             if(j.command == "close")
             {
+                const value = ('; '+document.cookie).split(`; sessionID=`).pop().split(';')[0];
+                xhr.open("POST", `http://${domain}:8000/api/disconnect`, true);
+                xhr.send(`{"sessionID":"${value}"}`);
                 ws.close();
             }
 
@@ -329,7 +332,7 @@ function send_answer(a,obj)
     if(!s)
     {
         document.getElementById(obj.id).style.cssText = `
-            border-color: cyan;
+            border-color: red;
             border-width: 5px;
         `
         s=true;
