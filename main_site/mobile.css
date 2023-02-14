@@ -67,7 +67,9 @@ body
     border-radius: 5px;
     border-color: black;
     text-align: center;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 #main_button
@@ -81,6 +83,7 @@ body
     color: white;
     margin-top: 5px;
     border-width: 2px;
+    font-size: 20px;
     border-color: white;
 }
 
