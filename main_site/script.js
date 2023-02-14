@@ -244,6 +244,11 @@ function connect_all()
                 await update_m2("Starting...");
                 ready=true;
             }
+            
+            if(j.command == "close")
+            {
+                ws.close();
+            }
 
         }
     });

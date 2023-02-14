@@ -44,8 +44,8 @@ def reset():
     sent=False
     answered=True
     count=0
-    CLIENTS=CLIENTS.clear()
-    CLIENTS=set()
+    basic["command"] = "close"
+    WORD=str(basic)
     basic = {
         "command":"",
         "question":""
