@@ -400,20 +400,18 @@ async function reset()
         ws.close();
     }
 
-    await sleep(1000);
-
+    await sleep(500);
     window.location.reload();
 }
 
-window.onbeforeunload = async function (e) {
+window.addEventListener('beforeunload', async (event)=>{
     if (ws.readyState !== WebSocket.CLOSED) {
         xhr = new XMLHttpRequest();
         const value = ('; '+document.cookie).split(`; sessionID=`).pop().split(';')[0];
         xhr.open("POST", `http://${domain}:8000/api/disconnect`, true);
         xhr.send(`{"sessionID":"${value}"}`);
         ws.close();
+        await sleep(500);
+        return 'Disconnecting';
     }
-
-    await sleep(1000);
-
-  };
+})

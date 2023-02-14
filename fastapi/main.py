@@ -243,6 +243,7 @@ async def disconnect(request: Request):
 
     for elem in ids.copy():
         if elem == q:
+            groups[ids[elem]["group"]] += 1
             del ids[elem]
 
     return {"success":"true"}
