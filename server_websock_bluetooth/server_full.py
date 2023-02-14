@@ -77,12 +77,12 @@ def input_loop():
     global basic
     global count
     global CLIENTS
+    global answered
 
     ready=False
     sent=False
 
     index = 0
-    question_per_round = 1
     GROUPS = ["a","d"]
 
     server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)

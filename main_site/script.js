@@ -1,4 +1,4 @@
-var domain='10.214.93.207'
+var domain='192.168.168.103'
 var ws;
 
 if(!(navigator.userAgent.match(/firefox/i)))
@@ -243,9 +243,6 @@ function connect_all()
             
             if(j.command == "close")
             {
-                const value = ('; '+document.cookie).split(`; sessionID=`).pop().split(';')[0];
-                xhr.open("POST", `http://${domain}:8000/api/disconnect`, true);
-                xhr.send(`{"sessionID":"${value}"}`);
                 ws.close();
             }
 
