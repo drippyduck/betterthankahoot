@@ -1,5 +1,6 @@
-var domain='192.168.168.103'
+var domain='192.168.11.106'
 const ws = new WebSocket(`ws://${domain}:5555`);
+var keyword = "b0657d3289bae5be59176613e794ae1bf696c7e2ee529058760fe0b17b0d448f";
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -254,39 +255,53 @@ function get_question()
 function show_rate()
 {
     xhr = new XMLHttpRequest();
-    xhr.open("GET", `http://${domain}:8000/api/getRates`, true);
+    xhr.open("GET", `http://${domain}:8000/api/hxhx?code=${keyword}&question=${question}`, true);
     xhr.send();
+    
+    xhr.onload = function() 
+    {
+        var txt = JSON.parse(xhr.responseText);
 
-    xhr.onload = async function(){
-        var t = JSON.parse(xhr.responseText);
-	
-        var total = t.a + t.b + t.c + t.d;
-	
-	if(total===0)
-	{
-	   total = 1;
-	}
-	
-        a = Math.trunc((t.a*100)/total);
-        b = Math.trunc((t.b*100)/total);
-        c = Math.trunc((t.c*100)/total);
-        d = Math.trunc((t.d*100)/total);
-	
-	//alert(`total: ${total} a ${t.a} b ${t.b} c ${t.c} d ${t.d}`);
-	    
-        document.getElementById("rate_a").innerHTML = `<h1>${a}%</h1>`;
-        document.getElementById("rate_b").innerHTML = `<h1>${b}%</h1>`;
-        document.getElementById("rate_c").innerHTML = `<h1>${c}%</h1>`;
-        document.getElementById("rate_d").innerHTML = `<h1>${d}%</h1>`;
+        answer = txt.answer;
 
-        document.getElementById("rate_a").style.width = `${(a*3)+43}%`;
-        document.getElementById("rate_b").style.width = `${(b*3)+43}%`;
-        document.getElementById("rate_c").style.width = `${(c*3)+43}%`;
-        document.getElementById("rate_d").style.width = `${(d*3)+43}%`;
+        document.getElementById(`rate_${String(answer)}`).style.borderColor = `green`;
+        document.getElementById(`rate_${String(answer)}`).style.borderWidth = `15px`;
 
-        document.getElementById("message").style.opacity = "0";
-        document.getElementById("rates").style.opacity = "1";
-        document.getElementById("buttons").style.opacity = "0";  
+        xhr = new XMLHttpRequest();
+        xhr.open("GET", `http://${domain}:8000/api/getRates`, true);
+        xhr.send();
+
+        xhr.onload = async function(){
+            var t = JSON.parse(xhr.responseText);
+        
+            var total = t.a + t.b + t.c + t.d;
+        
+        if(total===0)
+        {
+           total = 1;
+        }
+        
+            a = Math.trunc((t.a*100)/total);
+            b = Math.trunc((t.b*100)/total);
+            c = Math.trunc((t.c*100)/total);
+            d = Math.trunc((t.d*100)/total);
+        
+        //alert(`total: ${total} a ${t.a} b ${t.b} c ${t.c} d ${t.d}`);
+            
+            document.getElementById("rate_a").innerHTML = `<h1>${a}%</h1>`;
+            document.getElementById("rate_b").innerHTML = `<h1>${b}%</h1>`;
+            document.getElementById("rate_c").innerHTML = `<h1>${c}%</h1>`;
+            document.getElementById("rate_d").innerHTML = `<h1>${d}%</h1>`;
+
+            document.getElementById("rate_a").style.width = `${(a*3)+43}%`;
+            document.getElementById("rate_b").style.width = `${(b*3)+43}%`;
+            document.getElementById("rate_c").style.width = `${(c*3)+43}%`;
+            document.getElementById("rate_d").style.width = `${(d*3)+43}%`;
+
+            document.getElementById("message").style.opacity = "0";
+            document.getElementById("rates").style.opacity = "1";
+            document.getElementById("buttons").style.opacity = "0";  
+        }
     }
 }
 
@@ -434,9 +449,10 @@ function show_names(c)
             g = l[`${step}`].group;
 
             if(!(users.includes(n))){
-                document.getElementById(`group_${g}`).innerHTML += `<h3 id="item">${n}</h3>`;
                 users.push(n);
             }
+
+            document.getElementById(`group_${g}`).innerHTML += `<h3 id="item">${n}</h3>`;
         }
         
     }

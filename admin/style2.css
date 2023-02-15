@@ -64,7 +64,7 @@
     grid-template-columns: auto auto auto;
 }
 
-#item{
+.item{
     text-align: center;
     border-radius: 15px;
     border: solid;
@@ -74,6 +74,8 @@
     margin-bottom: 4px;
     border-width: 5px;
     background-color: yellow;
+    transition: .25s ease;
+    opacity: 0;
 }
 
 #titles

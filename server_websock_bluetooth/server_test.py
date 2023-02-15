@@ -11,7 +11,7 @@ ready=False
 sent=False
 answered=True
 index = 0
-question_per_round = 5
+question_per_round = 1
 final_q = 1
 GROUPS = ["a","d"]
 domain=sys.argv[1]
@@ -139,7 +139,7 @@ def input_loop():
                             
                             print(w)
                             
-                            if len(list(json.loads(w)["winners"])) > 1:
+                            if (len(list(json.loads(w)["winners"])) > 30 and GROUPS[index] == "a") or (len(list(json.loads(w)["winners"])) > 15 and GROUPS[index] == "b") or (len(list(json.loads(w)["winners"])) > 5 and GROUPS[index] == "c"):
                                 print("More questions!!")
                                 add_question(1)
 

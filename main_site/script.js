@@ -1,4 +1,4 @@
-var domain='192.168.168.103'
+var domain='192.168.11.106'
 var ws;
 
 if(!(navigator.userAgent.match(/firefox/i)))
@@ -205,11 +205,12 @@ function connect_all()
                 }
                 else if(j.command == "win")
                 {
-                    if(j.id == id)
+                    if(JSON.parse(j.id).includes(id))
                     {
+                        alert("WIN");
                         await update_m2("Group winner!");
-                        group="d";
-                        get_profile_v2();
+                        //group="d";
+                        //get_profile_v2();
                     }
                     else
                     {

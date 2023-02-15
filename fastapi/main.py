@@ -184,24 +184,14 @@ async def get_winner(group: str):
 
     winners={"winners":[]}
 
-    max = 0
-    for key in ids:
-        if ids[key]["score"] > max and ids[key]["group"] == group:
-            max = ids[key]["score"]
+    #if (len(list(json.loads(w)["winners"])) > 30 and group == "a") or (len(list(json.loads(w)["winners"])) > 15 and group == "b") or (len(list(json.loads(w)["winners"])) > 5 and group == "c"):
 
-    for key in ids:
-        if ids[key]["score"] == max:
-            winners["winners"].append(ids[key]["id"])
+    l = get_rate(group)
 
-    if len(winners["winners"]) == 1:
-        tmp_id = winners["winners"][0]
+    for elem in l:
+        winners["winners"],append(str(l[elem]["id"]))
 
-        for key in ids:
-            if ids[key]["id"] == tmp_id:
-                if ids[key]["group"] != "d":
-                    ids[key]["group"] = "d"
-                    ids[key]["score"] = 0
-                
+
     return winners
     
 
@@ -231,6 +221,13 @@ async def send_answer(request: Request):
         rates["d"] += 1
 
     return {"success":"true"}
+
+@app.get("/api/hxhx")
+async def get_answer(code: str, question: str):
+    if code == "b0657d3289bae5be59176613e794ae1bf696c7e2ee529058760fe0b17b0d448f":
+        q = int(question)
+        mycursor.execute(f"SELECT answer FROM questions WHERE id = {q};")
+        return {"answer":f"{str(mycursor.fetchone()[0])}"}
 
 @app.post("/api/disconnect")
 async def disconnect(request: Request):
