@@ -1,4 +1,4 @@
-var domain='192.168.11.106'
+var domain='10.214.93.207'
 var ws;
 
 if(!(navigator.userAgent.match(/firefox/i)))
@@ -205,7 +205,8 @@ function connect_all()
                 }
                 else if(j.command == "win")
                 {
-                    if(JSON.parse(j.id).includes(id))
+                    alert(j.id);
+                    if(JSON.parse(j.id).includes(String(id)))
                     {
                         alert("WIN");
                         await update_m2("Group winner!");

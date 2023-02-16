@@ -154,7 +154,7 @@ def input_loop():
                                     basic["command"] = "win"
 
                                 basic["group"] = GROUPS[index]
-                                basic["id"] = str(id)
+                                basic["id"] = str(list(id))
                                 WORD=str(basic)
 
                                 ready=False

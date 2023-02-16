@@ -186,10 +186,20 @@ async def get_winner(group: str):
 
     #if (len(list(json.loads(w)["winners"])) > 30 and group == "a") or (len(list(json.loads(w)["winners"])) > 15 and group == "b") or (len(list(json.loads(w)["winners"])) > 5 and group == "c"):
 
-    l = get_rate(group)
+    l={}
 
-    for elem in l:
-        winners["winners"],append(str(l[elem]["id"]))
+    for elem in ids:
+        if ids[elem]["group"] == group:
+            id = ids[elem]["id"]
+            score = ids[elem]["score"]
+            name = ids[elem]["name"]
+
+            l[id] = {"name":name,"score":score}
+
+    l = sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
+
+    for elem in list(l):
+        winners["winners"].append(elem[0])
 
 
     return winners
