@@ -201,7 +201,8 @@ async def get_winner(group: str):
     for elem in list(l):
         winners["winners"].append(elem[0])
 
-
+    winners["winners"].append("3")
+    
     return winners
     
 

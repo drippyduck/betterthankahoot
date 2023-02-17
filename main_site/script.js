@@ -190,6 +190,7 @@ function connect_all()
             
             if(ready && j.group == group)
             {
+                
                 if(j.command == "go")
                 {
                     question = j.question;
@@ -205,7 +206,8 @@ function connect_all()
                 }
                 else if(j.command == "win")
                 {
-                    alert(j.id);
+                    alert('test');
+                    /*
                     if(JSON.parse(j.id).includes(String(id)))
                     {
                         alert("WIN");
@@ -219,6 +221,7 @@ function connect_all()
                         await sleep(10000);
                         window.location.reload();
                     }
+                    */
                 }
                 else if(j.command == "final")
                 {

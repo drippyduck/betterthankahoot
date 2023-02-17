@@ -145,7 +145,7 @@ def input_loop():
 
                             else:
 
-                                id = list(json.loads(w)['winners'])[0]
+                                id = list(json.loads(w)['winners'])
                                 print(f"Queue is empty and we have a winner with id {id}!")
 
                                 if GROUPS[index] == "d":
@@ -156,6 +156,8 @@ def input_loop():
                                 basic["group"] = GROUPS[index]
                                 basic["id"] = str(list(id))
                                 WORD=str(basic)
+
+                                print(WORD)
 
                                 ready=False
                                 index += 1
