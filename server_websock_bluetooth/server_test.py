@@ -135,11 +135,9 @@ def input_loop():
                     else:
                         try:
 
-                            w = requests.get(f"http://{domain}:8000/api/getWinner?group={GROUPS[index]}").text
+                            w = list(json.loads(requests.get(f"http://{domain}:8000/api/getWinner?group={GROUPS[index]}").text))
                             
-                            print(w)
-                            
-                            if (len(list(json.loads(w)["winners"])) > 30 and GROUPS[index] == "a") or (len(list(json.loads(w)["winners"])) > 15 and GROUPS[index] == "b") or (len(list(json.loads(w)["winners"])) > 5 and GROUPS[index] == "c"):
+                            if (len(w) > 30 and GROUPS[index] == "a") or (len(w) > 15 and GROUPS[index] == "b") or (len(w) > 5 and GROUPS[index] == "c") or or (len(w) > 1 and GROUPS[index] == "d"):
                                 print("More questions!!")
                                 add_question(1)
 
@@ -154,10 +152,7 @@ def input_loop():
                                     basic["command"] = "win"
 
                                 basic["group"] = GROUPS[index]
-                                basic["id"] = str(list(id))
                                 WORD=str(basic)
-
-                                print(WORD)
 
                                 ready=False
                                 index += 1

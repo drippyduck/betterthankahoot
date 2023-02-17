@@ -1,4 +1,4 @@
-var domain='10.214.93.207'
+var domain='192.168.11.110'
 var ws;
 
 if(!(navigator.userAgent.match(/firefox/i)))
@@ -102,12 +102,22 @@ async function update_profile(a,b,c)
 
     document.getElementById("name").innerText = `Name: ${a}`;
 
-    if(b=="d")
+    if(b=="a")
     {
-        document.getElementById("group").innerText = `Group: F`;
+        document.getElementById("group").innerText = `Group: Top 5`;
     }
-    else
-        document.getElementById("group").innerText = `Group: ${b}`;
+    else if(b=="b")
+    {
+        document.getElementById("group").innerText = `Group: Top 15`;
+    }
+    else if(b=="c")
+    {
+        document.getElementById("group").innerText = `Group: Top 30`;
+    }
+    else if(b=="d")
+    {
+        document.getElementById("group").innerText = `Group: Top 60-80`;
+    }
         
     document.getElementById("score").innerText = `Score: ${c}`;
 
@@ -130,6 +140,8 @@ var group;
 var id;
 var s=false;
 var ans=0;
+var index=0;
+var groups = ["a","b","c","d"];
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -206,36 +218,68 @@ function connect_all()
                 }
                 else if(j.command == "win")
                 {
-                    alert('test');
-                    /*
-                    if(JSON.parse(j.id).includes(String(id)))
-                    {
-                        alert("WIN");
-                        await update_m2("Group winner!");
-                        //group="d";
-                        //get_profile_v2();
+                    xhr = new XMLHttpRequest();
+                    xhr.open("GET", `http://${domain}:8000/api/getWinner?group=${groups[index]}`, true);
+                    xhr.send();
+
+                    xhr.onload = async function() {
+                        var resp = xhr.responseText;
+                        var list = JSON.parse(resp).winners;
+
+                        if(list.includes(id))
+                        {
+                            var phrase;
+                            index+=1;
+
+                            if(groups[index]=="b")
+                            {
+                                phrase="You made it to top 30!";
+                            }
+                            else if(groups[index]=="c")
+                            {
+                                phrase="You made it to top 15!"
+                            }
+                            else
+                            {
+                                phrase="You made it to top 5!"
+                            }
+
+
+                            await update_m2(phrase);
+                            
+                            group=groups[index];
+                            get_profile_v2();
+                        }
+                        else
+                        {
+                            await update_m2("You lost!");
+                            await sleep(10000);
+                            window.location.reload();
+                        }
                     }
-                    else
-                    {
-                        await update_m2("You lost!");
-                        await sleep(10000);
-                        window.location.reload();
-                    }
-                    */
                 }
                 else if(j.command == "final")
                 {
-                    if(j.id == id)
-                    {
-                        await update_m2("Finals winner!");
-                        await sleep(10000);
-                        window.location.reload();
-                    }
-                    else
-                    {
-                        await update_m2("Lost final!");
-                        await sleep(10000);
-                        window.location.reload();
+                    xhr = new XMLHttpRequest();
+                    xhr.open("GET", `http://${domain}:8000/api/getWinner?group=${groups[index]}`, true);
+                    xhr.send();
+
+                    xhr.onload = async function() {
+                        var resp = xhr.responseText;
+                        var list = JSON.parse(resp).winners;
+
+                        if(list.includes(id))
+                        {
+                            await update_m2("Finals winner!");
+                            await sleep(10000);
+                            window.location.reload();
+                        }
+                        else
+                        {
+                            await update_m2("Lost final!");
+                            await sleep(10000);
+                            window.location.reload();
+                        }
                     }
                 }
             }

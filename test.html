@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet"> 
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var id="10";
+
+        function check_winner()
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", `http://192.168.11.110:8000/api/getWinner?group=a`, true);
+            xhr.send();
+
+            xhr.onload = function() {
+                var resp = xhr.responseText;
+                var list = JSON.parse(resp).winners;
+
+                if(list.includes(id))
+                {
+                    alert("YOu won!");
+                }
+            }
+        }
+    </script>
+
+    <button onclick="check_winner()">click</button>
+</body>
+</html>

@@ -22,7 +22,7 @@ def sanitize(word):
 
     return s
 
-mydb = mysql.connector.connect(host="localhost",user="root",password="root")
+mydb = mysql.connector.connect(host="localhost",user="root",password="")
 
 mycursor = mydb.cursor()
 
@@ -183,9 +183,7 @@ async def get_winner(group: str):
     global ids
 
     winners={"winners":[]}
-
-    #if (len(list(json.loads(w)["winners"])) > 30 and group == "a") or (len(list(json.loads(w)["winners"])) > 15 and group == "b") or (len(list(json.loads(w)["winners"])) > 5 and group == "c"):
-
+    
     l={}
 
     for elem in ids:
