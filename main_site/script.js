@@ -102,19 +102,19 @@ async function update_profile(a,b,c)
 
     document.getElementById("name").innerText = `Name: ${a}`;
 
-    if(b=="a")
+    if(b=="d")
     {
         document.getElementById("group").innerText = `Group: Top 5`;
     }
-    else if(b=="b")
+    else if(b=="c")
     {
         document.getElementById("group").innerText = `Group: Top 15`;
     }
-    else if(b=="c")
+    else if(b=="b")
     {
         document.getElementById("group").innerText = `Group: Top 30`;
     }
-    else if(b=="d")
+    else if(b=="a")
     {
         document.getElementById("group").innerText = `Group: Top 60-80`;
     }
@@ -219,7 +219,7 @@ function connect_all()
                 else if(j.command == "win")
                 {
                     xhr = new XMLHttpRequest();
-                    xhr.open("GET", `http://${domain}:8000/api/getWinner?group=${groups[index]}`, true);
+                    xhr.open("GET", `http://${domain}:8000/api/getWinner2?group=${groups[index]}`, true);
                     xhr.send();
 
                     xhr.onload = async function() {
@@ -261,7 +261,7 @@ function connect_all()
                 else if(j.command == "final")
                 {
                     xhr = new XMLHttpRequest();
-                    xhr.open("GET", `http://${domain}:8000/api/getWinner?group=${groups[index]}`, true);
+                    xhr.open("GET", `http://${domain}:8000/api/getWinner2?group=${groups[index]}`, true);
                     xhr.send();
 
                     xhr.onload = async function() {

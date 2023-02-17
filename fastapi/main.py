@@ -58,6 +58,10 @@ groups = {
 }
 
 ids = {}
+group_a_winners = []
+group_b_winners = []
+group_c_winners = []
+group_d_winners = []
 
 id=1
 stat=0
@@ -199,9 +203,53 @@ async def get_winner(group: str):
     for elem in list(l):
         winners["winners"].append(elem[0])
 
-    winners["winners"].append("3")
+    if( group=="d" and len(list(l)) == 1):
+        for elem in ids:
+            if ids[elem]["id"] in list(winners["winners"]):
+                group_d_winners.append(str(ids[elem]["id"]))
+
+    elif( group=="c" and len(list(l)) <= 5):
+        for elem in ids:
+            if ids[elem]["id"] in list(winners["winners"]):
+                group_c_winners.append(str(ids[elem]["id"]))
+                ids[elem]["group"] = "d"
+                ids[elem]["score"] = 0
+
+    elif( group=="b" and len(list(l)) <= 15):
+        for elem in ids:
+            if ids[elem]["id"] in list(winners["winners"]):
+                group_b_winners.append(str(ids[elem]["id"]))
+                ids[elem]["group"] = "c"
+                ids[elem]["score"] = 0
+
+    elif( group=="a" and len(list(l)) <= 30):
+        for elem in ids:
+            if str(ids[elem]["id"]) in list(winners["winners"]):
+                group_a_winners.append(str(ids[elem]["id"]))
+                ids[elem]["group"] = "b"
+                ids[elem]["score"] = 0
     
     return winners
+
+
+@app.get("/api/getWinner2")
+async def get_winner2(group: str):
+    l=[]
+
+    if group == "a":
+        for elem in group_a_winners:
+            l.append(elem)
+    elif group == "b":
+        for elem in group_b_winners:
+            l.append(elem)
+    elif group == "c":
+        for elem in group_c_winners:
+            l.append(elem)
+    elif group == "d":
+        for elem in group_d_winners:
+            l.append(elem)
+
+    return {"winners":l}
     
 
 @app.post("/api/submitAnswer")
@@ -249,7 +297,8 @@ async def disconnect(request: Request):
 
     for elem in ids.copy():
         if elem == q:
-            groups[ids[elem]["group"]] += 1
+            if ids[elem]["group"] != "d":
+                groups[ids[elem]["group"]] += 1
             del ids[elem]
 
     return {"success":"true"}

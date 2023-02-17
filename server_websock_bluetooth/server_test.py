@@ -13,7 +13,7 @@ answered=True
 index = 0
 question_per_round = 1
 final_q = 1
-GROUPS = ["a","d"]
+GROUPS = ["a","b","c","d"]
 domain=sys.argv[1]
 limit = int(str(json.loads(requests.get(f"http://{domain}:8000/api/getRows").text)["number"])[1:-1])
 questions = []
@@ -69,6 +69,9 @@ def add_question(r):
             q.put(elem)
             questions.append(elem)
             i+=1
+
+def start_timer():
+    requests.get(f"http://{domain}:8000/api/startTimer")
 
 def input_loop():
     global WORD
@@ -137,14 +140,13 @@ def input_loop():
 
                             w = list(json.loads(requests.get(f"http://{domain}:8000/api/getWinner?group={GROUPS[index]}").text))
                             
-                            if (len(w) > 30 and GROUPS[index] == "a") or (len(w) > 15 and GROUPS[index] == "b") or (len(w) > 5 and GROUPS[index] == "c") or or (len(w) > 1 and GROUPS[index] == "d"):
+                            if (len(w) > 30 and GROUPS[index] == "a") or (len(w) > 15 and GROUPS[index] == "b") or (len(w) > 5 and GROUPS[index] == "c") or (len(w) > 1 and GROUPS[index] == "d"):
                                 print("More questions!!")
                                 add_question(1)
 
                             else:
 
-                                id = list(json.loads(w)['winners'])
-                                print(f"Queue is empty and we have a winner with id {id}!")
+                                print(f"Queue is empty and we can move to next round!")
 
                                 if GROUPS[index] == "d":
                                     basic["command"] = "final"
@@ -179,7 +181,7 @@ def input_loop():
                         WORD=str(basic)
 
                         time.sleep(1)
-                        requests.get(f"http://{domain}:8000/api/startTimer")
+                        threading.Thread(target=start_timer).start()
                         sent=False
                         answered=True
 
