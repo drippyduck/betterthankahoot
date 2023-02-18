@@ -186,24 +186,15 @@ async def get_rate(group: str):
 async def get_winner(group: str):
     global ids
 
-    group_a_winners.clear()
-    group_b_winners.clear()
-    group_c_winners.clear()
-    group_d_winners.clear()
-
     winners={"winners":[]}
 
     if group == "a":
-        group_a_winners.clear()
         wanted = 4
     elif group == "b":
-        group_b_winners.clear()
         wanted = 15
     elif group == "c":
-        group_c_winners.clear()
         wanted = 5
     elif group == "d":
-        group_d_winners.clear()
         wanted = 1
 
     last_score = 0
@@ -223,22 +214,7 @@ async def get_winner(group: str):
 
     for i in range(len(new)):
             score = l[i][1]["score"]
-
-            if group == "a":
-                for elem in ids:
-                    if ids[elem]["id"] == l[i][0]:
-                        ids[elem]["group"] = "b"
-
-            elif group == "b":
-                for elem in ids:
-                    if ids[elem]["id"] == l[i][0]:
-                        ids[elem]["group"] = "c"
-
-            elif group == "c":
-                for elem in ids:
-                    if ids[elem]["id"] == l[i][0]:
-                        ids[elem]["group"] = "d"
-
+                
             if i+1 == wanted:
                 last_score = score
             elif i+1 > wanted and score != last_score:
@@ -248,20 +224,22 @@ async def get_winner(group: str):
     for elem in list(l):
 
         if group == "a":
+            if elem[0] not in group_a_winners:
                 group_a_winners.append(elem[0])
         elif group == "b":
+            if elem[0] not in group_b_winners:
                 group_b_winners.append(elem[0])
         elif group == "c":
+            if elem[0] not in group_c_winners:
                 group_c_winners.append(elem[0])
         elif group == "d":
+            if elem[0] not in group_d_winners:
                 group_d_winners.append(elem[0])
 
         winners["winners"].append(elem[0])
 
     """
     if( group=="d" and len(list(l)) == 1):
-        group_d_winners.clear()
-
         for elem in ids:
             if ids[elem]["id"] in list(winners["winners"]):
                 group_d_winners.append(str(ids[elem]["id"]))
@@ -270,25 +248,22 @@ async def get_winner(group: str):
         #group_c_winners.clear()
 
         for elem in ids:
-            #if ids[elem]["id"] in list(winners["winners"]):
-                #group_c_winners.append(str(ids[elem]["id"]))
-                ids[elem]["group"] = "d"
-                ids[elem]["score"] = 0
+                    if ids[elem]["id"] == l[i][0]:
+                        ids[elem]["group"] = "d"
+                        ids[elem]["score"] = 0
 
     elif( group=="b" and len(list(l)) == 15):
         #group_b_winners.clear()
 
         for elem in ids:
-            #if ids[elem]["id"] in list(winners["winners"]):
-                #group_b_winners.append(str(ids[elem]["id"]))
+            if ids[elem]["id"] == l[i][0]:
                 ids[elem]["group"] = "c"
                 ids[elem]["score"] = 0
 
     elif( group=="a" and len(list(l)) == 4):
         #group_a_winners.clear()
         for elem in ids:
-            #if str(ids[elem]["id"]) in list(winners["winners"]):
-                #group_a_winners.append(str(ids[elem]["id"]))
+            if ids[elem]["id"] == l[i][0]:
                 ids[elem]["group"] = "b"
                 ids[elem]["score"] = 0
     
