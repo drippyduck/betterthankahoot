@@ -72,6 +72,7 @@ def add_question(r):
 
 def start_timer():
     requests.get(f"http://{domain}:8000/api/startTimer")
+    print("FInished timwer")
 
 def input_loop():
     global WORD
@@ -132,17 +133,25 @@ def input_loop():
                         basic["group"] = GROUPS[index]
                         WORD=str(basic)
 
+                        print(f"Sent question to group {GROUPS[index]}")
                         sent=True
                         answered=False
 
                     else:
                         try:
 
-                            w = list(json.loads(requests.get(f"http://{domain}:8000/api/getWinner?group={GROUPS[index]}").text))
-                            
+                            w = list(json.loads(requests.get(f"http://{domain}:8000/api/getWinner?group={GROUPS[index]}").text)["winners"])
+
                             if (len(w) > 4 and GROUPS[index] == "a") or (len(w) > 15 and GROUPS[index] == "b") or (len(w) > 5 and GROUPS[index] == "c") or (len(w) > 1 and GROUPS[index] == "d"):
                                 print("More questions!!")
                                 add_question(1)
+
+                                if GROUPS[index] == "d":
+                                    basic["command"] = "final"
+                                else:
+                                    basic["command"] = "win"
+
+                                WORD = str(basic)
 
                             else:
 

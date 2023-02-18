@@ -22,7 +22,7 @@ def sanitize(word):
 
     return s
 
-mydb = mysql.connector.connect(host="localhost",user="root",password="")
+mydb = mysql.connector.connect(host="localhost",user="root",password="root")
 
 mycursor = mydb.cursor()
 
@@ -186,21 +186,32 @@ async def get_rate(group: str):
 async def get_winner(group: str):
     global ids
 
+    group_a_winners.clear()
+    group_b_winners.clear()
+    group_c_winners.clear()
+    group_d_winners.clear()
+
     winners={"winners":[]}
 
     if group == "a":
-        wanted = 30
+        group_a_winners.clear()
+        wanted = 4
     elif group == "b":
+        group_b_winners.clear()
         wanted = 15
     elif group == "c":
+        group_c_winners.clear()
         wanted = 5
     elif group == "d":
+        group_d_winners.clear()
         wanted = 1
 
     last_score = 0
     
-    l={"41":{"name":"tester2","score":200},
-    "42":{"name":"tester2","score":200},
+    l={
+    "40":{"name":"tester4","score":200},
+    "41":{"name":"tester2","score":200},
+    "42":{"name":"tester2","score":300},
     "43":{"name":"tester2","score":250},
     "44":{"name":"tester2","score":350}}
 
@@ -212,43 +223,64 @@ async def get_winner(group: str):
 
             l[id] = {"name":name,"score":score}
 
-    for i in range(len(l)):
-
-        score = l[i][1]["score"]
-
-        if i+1 == wanted:
-            last_score = score
-        elif i+1 > wanted and score != last_score:
-            l.remove(l[i])
-
     l = sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
 
+    for i in range(len(l)):
+
+        try:
+            score = l[i][1]["score"]
+
+            if i+1 == wanted:
+                last_score = score
+            elif i+1 > wanted and score != last_score:
+                l.remove(l[i])
+        except:
+            pass
+
     for elem in list(l):
+
+        if group == "a":
+                group_a_winners.append(elem[0])
+        elif group == "b":
+                group_b_winners.append(elem[0])
+        elif group == "c":
+                group_c_winners.append(elem[0])
+        elif group == "d":
+                group_d_winners.append(elem[0])
+
         winners["winners"].append(elem[0])
 
+    """
     if( group=="d" and len(list(l)) == 1):
+        group_d_winners.clear()
+
         for elem in ids:
             if ids[elem]["id"] in list(winners["winners"]):
                 group_d_winners.append(str(ids[elem]["id"]))
+    """
+    if( group=="c" and len(list(l)) == 5):
+        #group_c_winners.clear()
 
-    elif( group=="c" and len(list(l)) <= 5):
         for elem in ids:
-            if ids[elem]["id"] in list(winners["winners"]):
-                group_c_winners.append(str(ids[elem]["id"]))
+            #if ids[elem]["id"] in list(winners["winners"]):
+                #group_c_winners.append(str(ids[elem]["id"]))
                 ids[elem]["group"] = "d"
                 ids[elem]["score"] = 0
 
-    elif( group=="b" and len(list(l)) <= 15):
+    elif( group=="b" and len(list(l)) == 15):
+        #group_b_winners.clear()
+
         for elem in ids:
-            if ids[elem]["id"] in list(winners["winners"]):
-                group_b_winners.append(str(ids[elem]["id"]))
+            #if ids[elem]["id"] in list(winners["winners"]):
+                #group_b_winners.append(str(ids[elem]["id"]))
                 ids[elem]["group"] = "c"
                 ids[elem]["score"] = 0
 
-    elif( group=="a" and len(list(l)) <= 4):
+    elif( group=="a" and len(list(l)) == 4):
+        #group_a_winners.clear()
         for elem in ids:
-            if str(ids[elem]["id"]) in list(winners["winners"]):
-                group_a_winners.append(str(ids[elem]["id"]))
+            #if str(ids[elem]["id"]) in list(winners["winners"]):
+                #group_a_winners.append(str(ids[elem]["id"]))
                 ids[elem]["group"] = "b"
                 ids[elem]["score"] = 0
     
@@ -262,6 +294,7 @@ async def get_winner2(group: str):
     if group == "a":
         for elem in group_a_winners:
             l.append(elem)
+            ids[elem]["group"] = "b"
     elif group == "b":
         for elem in group_b_winners:
             l.append(elem)

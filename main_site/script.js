@@ -1,4 +1,4 @@
-var domain='192.168.11.110'
+var domain='192.168.11.106'
 var ws;
 
 if(!(navigator.userAgent.match(/firefox/i)))
@@ -166,6 +166,31 @@ async function start_timer()
     canAnswer = false;
 }
 
+async function advance()
+{
+    var phrase;
+    index+=1;
+
+    if(groups[index]=="b")
+    {
+        phrase="You made it to top 30!";
+    }
+    else if(groups[index]=="c")
+    {
+        phrase="You made it to top 15!"
+    }
+    else
+    {
+        phrase="You made it to top 5!"
+    }
+
+
+    await update_m2(phrase);
+    
+    group=groups[index];
+    get_profile_v2();
+}
+
 function connect_all()
 {
     xhr = new XMLHttpRequest();
@@ -228,27 +253,61 @@ function connect_all()
 
                         if(list.includes(id))
                         {
-                            var phrase;
-                            index+=1;
+                            // get position of id
+                            // if group a and pos == 5 or more
+                            // stay in group and wait
+                            var check = false;
 
-                            if(groups[index]=="b")
+                            if(groups[index] == "a" && list.length > 4)
                             {
-                                phrase="You made it to top 30!";
+                                for (let i = 4; i < list.length; i++) 
+                                {
+                                    if(id == list[i])
+                                    {
+                                        check=true;
+                                    }
+                                }
                             }
-                            else if(groups[index]=="c")
+                            else if(groups[index] == "b" && list.length > 15)
                             {
-                                phrase="You made it to top 15!"
+                                for (let i = 4; i < list.length; i++) 
+                                {
+                                    if(id == list[i])
+                                    {
+                                        check=true;
+                                    }
+                                }
+                            }
+                            else if(groups[index] == "c" && list.length > 5)
+                            {
+                                for (let i = 4; i < list.length; i++) 
+                                {
+                                    if(id == list[i])
+                                    {
+                                        check=true;
+                                    }
+                                }
+                            }
+                            else if(groups[index] == "d" && list.length > 1)
+                            {
+                                for (let i = 4; i < list.length; i++) 
+                                {
+                                    if(id == list[i])
+                                    {
+                                        check=true;
+                                    }
+                                }
+                            }
+
+                            if(check)
+                            {
+                                await update_m2("Waiting for additional questions...");
+                                get_profile_v2();
                             }
                             else
                             {
-                                phrase="You made it to top 5!"
+                                advance();
                             }
-
-
-                            await update_m2(phrase);
-                            
-                            group=groups[index];
-                            get_profile_v2();
                         }
                         else
                         {
