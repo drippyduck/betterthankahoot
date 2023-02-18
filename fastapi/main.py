@@ -187,8 +187,22 @@ async def get_winner(group: str):
     global ids
 
     winners={"winners":[]}
+
+    if group == "a":
+        wanted = 30
+    elif group == "b":
+        wanted = 15
+    elif group == "c":
+        wanted = 5
+    elif group == "d":
+        wanted = 1
+
+    last_score = 0
     
-    l={}
+    l={"41":{"name":"tester2","score":200},
+    "42":{"name":"tester2","score":200},
+    "43":{"name":"tester2","score":250},
+    "44":{"name":"tester2","score":350}}
 
     for elem in ids:
         if ids[elem]["group"] == group:
@@ -197,6 +211,15 @@ async def get_winner(group: str):
             name = ids[elem]["name"]
 
             l[id] = {"name":name,"score":score}
+
+    for i in range(len(l)):
+
+        score = l[i][1]["score"]
+
+        if i+1 == wanted:
+            last_score = score
+        elif i+1 > wanted and score != last_score:
+            l.remove(l[i])
 
     l = sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
 
@@ -222,7 +245,7 @@ async def get_winner(group: str):
                 ids[elem]["group"] = "c"
                 ids[elem]["score"] = 0
 
-    elif( group=="a" and len(list(l)) <= 30):
+    elif( group=="a" and len(list(l)) <= 4):
         for elem in ids:
             if str(ids[elem]["id"]) in list(winners["winners"]):
                 group_a_winners.append(str(ids[elem]["id"]))
