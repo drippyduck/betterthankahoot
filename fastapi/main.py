@@ -22,7 +22,7 @@ def sanitize(word):
 
     return s
 
-mydb = mysql.connector.connect(host="localhost",user="root",password="root")
+mydb = mysql.connector.connect(host="localhost",user="root",password="")
 
 mycursor = mydb.cursor()
 
@@ -208,12 +208,7 @@ async def get_winner(group: str):
 
     last_score = 0
     
-    l={
-    "40":{"name":"tester4","score":200},
-    "41":{"name":"tester2","score":200},
-    "42":{"name":"tester2","score":300},
-    "43":{"name":"tester2","score":250},
-    "44":{"name":"tester2","score":350}}
+    l={}
 
     for elem in ids:
         if ids[elem]["group"] == group:
@@ -224,18 +219,31 @@ async def get_winner(group: str):
             l[id] = {"name":name,"score":score}
 
     l = sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
+    new = l
 
-    for i in range(len(l)):
-
-        try:
+    for i in range(len(new)):
             score = l[i][1]["score"]
+
+            if group == "a":
+                for elem in ids:
+                    if ids[elem]["id"] == l[i][0]:
+                        ids[elem]["group"] = "b"
+
+            elif group == "b":
+                for elem in ids:
+                    if ids[elem]["id"] == l[i][0]:
+                        ids[elem]["group"] = "c"
+
+            elif group == "c":
+                for elem in ids:
+                    if ids[elem]["id"] == l[i][0]:
+                        ids[elem]["group"] = "d"
 
             if i+1 == wanted:
                 last_score = score
             elif i+1 > wanted and score != last_score:
                 l.remove(l[i])
-        except:
-            pass
+
 
     for elem in list(l):
 
@@ -294,7 +302,6 @@ async def get_winner2(group: str):
     if group == "a":
         for elem in group_a_winners:
             l.append(elem)
-            ids[elem]["group"] = "b"
     elif group == "b":
         for elem in group_b_winners:
             l.append(elem)
