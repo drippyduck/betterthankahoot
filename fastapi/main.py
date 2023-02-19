@@ -57,6 +57,8 @@ groups = {
     "c" : 0
 }
 
+g2 = ["a","b","c","d","f"]
+
 ids = {}
 
 id=1
@@ -167,8 +169,11 @@ async def get_rate(group: str):
 
     l={}
 
+    index = g2.index(group)
+    index2 = index + 1
+
     for elem in ids:
-        if ids[elem]["group"] == group:
+        if ids[elem]["group"] == g2[index] or ids[elem]["group"] == g2[index2]:
             id = ids[elem]["id"]
             score = ids[elem]["score"]
             name = ids[elem]["name"]

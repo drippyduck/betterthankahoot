@@ -73,7 +73,7 @@ body
     overflow: hidden;
     position: absolute;
     left: 50%;
-    top: 57%;
+    top: 30%;
     transform: translate(-50%, -50%);
     opacity: 0;
     height: 15%;

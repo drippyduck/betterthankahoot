@@ -101,6 +101,8 @@ var s=false;
 var ans=0;
 var winner = '';
 var users = [];
+var groups = ["a","b","c","d"]
+var index=0;
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -187,30 +189,14 @@ function connect_all()
                 }
                 else if(j.command == "win")
                 {
-                    xhr = new XMLHttpRequest();
-                    xhr.open("GET", `http://${domain}:8000/api/getUser?id=${j.id}`, true);
-                    xhr.send();
-
-                    xhr.onload = async function(){
-                        var l = JSON.parse(xhr.responseText);
-                        await update_m2(`Group ${j.group} Leaderboard:`);
-                        show_board_final();
-                    }
-
-                    group="d";
+                    await update_m2(`Group ${groups[index]} Leaderboard:`);
+                    show_board();
+                    index+=1;
                 }
                 else if(j.command == "final")
                 {
-                    xhr = new XMLHttpRequest();
-                    xhr.open("GET", `http://${domain}:8000/api/getUser?id=${j.id}`, true);
-                    xhr.send();
-
-                    xhr.onload = async function(){
-                        var l = JSON.parse(xhr.responseText);
-                        await update_m2(`Finals Leaderboard:`);
-                        show_board_final();
-                    }
-                    
+                    await update_m2(`Finals Leaderboard:`);
+                    show_board_final();
                 }
             }
 
@@ -234,6 +220,7 @@ function get_question()
         document.getElementById("buttons").style.top = "60%";
     }
 
+    document.getElementById("leader").style.opacity = "0";
     const value = ('; '+document.cookie).split(`; sessionID=`).pop().split(';')[0];
     xhr = new XMLHttpRequest();
     xhr.open("GET", `http://${domain}:8000/api/getQuestion?id=${question}`, true);
@@ -265,7 +252,7 @@ function show_rate()
         answer = txt.answer;
 
         document.getElementById(`rate_${String(answer)}`).style.borderColor = `green`;
-        document.getElementById(`rate_${String(answer)}`).style.borderWidth = `15px`;
+        document.getElementById(`rate_${String(answer)}`).style.borderWidth = `4px`;
 
         xhr = new XMLHttpRequest();
         xhr.open("GET", `http://${domain}:8000/api/getRates`, true);
@@ -316,7 +303,7 @@ function show_board()
 
         document.getElementById("leader").style.opacity = "0";
 
-        var elem = ["message","buttons","timer","leader","rates"];
+        var elem = ["message","buttons","timer","rates"];
         var elems2  = [];
 
         elem.forEach(function(dv)
@@ -335,7 +322,7 @@ function show_board()
         var l = JSON.parse(xhr.responseText);
         var s=l.length;
 
-        document.getElementById("leader").innerHTML = ``;
+        document.getElementById("group").innerHTML = ``;
 
         for (let step = 0; step < s; step++) 
         {
@@ -348,19 +335,7 @@ function show_board()
 
         }
 
-        await sleep(1000);
-
         document.getElementById("leader").style.opacity = "1";
-
-        await sleep(2000);
-
-        document.getElementById("leader").style.opacity = "0";
-
-
-        for ( var i=0; i<elems2.length; i++)
-        {
-            document.getElementById(elems2[i]).style.opacity = "1";
-        }
 
     }
 }
@@ -375,7 +350,7 @@ function show_board_final()
 
         document.getElementById("leader").style.opacity = "0";
 
-        var elem = ["message","buttons","timer","leader","rates"];
+        var elem = ["message","buttons","timer","leader"];
         var elems2  = [];
 
         elem.forEach(function(dv)
