@@ -185,7 +185,7 @@ async def get_winner(group: str):
     winners={"winners":[]}
 
     if group == "a":
-        wanted = 4
+        wanted = 30
     elif group == "b":
         wanted = 15
     elif group == "c":
@@ -195,10 +195,7 @@ async def get_winner(group: str):
 
     last_score = 0
     
-    l={"10":{"name":"test","score":100},
-       "11":{"name":"test","score":100},
-       "12":{"name":"test","score":100},
-       "13":{"name":"test","score":0}}
+    l={}
 
     for elem in ids:
         if ids[elem]["group"] == group:
@@ -251,7 +248,7 @@ async def get_winner(group: str):
                     ids[elem]["group"] = "c"
                     ids[elem]["score"] = 0
 
-    elif( group=="a" and len(list(l)) <= 4):
+    elif( group=="a" and len(list(l)) <= 30):
 
         for elem in ids:
             for e in list(l):

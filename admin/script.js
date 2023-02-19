@@ -311,7 +311,8 @@ function show_board()
     xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${group}`, true);
     xhr.send();
 
-    xhr.onload = async function(){
+    xhr.onload = async function()
+    {
 
         document.getElementById("leader").style.opacity = "0";
 
@@ -332,18 +333,9 @@ function show_board()
         });
 
         var l = JSON.parse(xhr.responseText);
-        var s;
+        var s=l.length;
 
-        if(l.length>5)
-        {
-            s=5;
-        }
-        else
-        {
-            s=l.length;
-        }
-
-        document.getElementById("board").innerHTML = ``;
+        document.getElementById("leader").innerHTML = ``;
 
         for (let step = 0; step < s; step++) 
         {
@@ -352,17 +344,17 @@ function show_board()
             var name = values[0];
             var score = values[1];
 
-            document.getElementById("board").innerHTML += `<h1 id="ranki">${step+1} : ${name} Score: ${score}</h1>`;
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
 
         }
 
         await sleep(1000);
 
-        document.getElementById("board").style.opacity = "1";
+        document.getElementById("leader").style.opacity = "1";
 
         await sleep(2000);
 
-        document.getElementById("board").style.opacity = "0";
+        document.getElementById("leader").style.opacity = "0";
 
 
         for ( var i=0; i<elems2.length; i++)
@@ -400,18 +392,9 @@ function show_board_final()
         });
 
         var l = JSON.parse(xhr.responseText);
-        var s;
+        var s=l.length;
 
-        if(l.length>5)
-        {
-            s=5;
-        }
-        else
-        {
-            s=l.length;
-        }
-
-        document.getElementById("board").innerHTML = ``;
+        document.getElementById("group").innerHTML = ``;
 
         for (let step = 0; step < s; step++) 
         {
@@ -420,13 +403,13 @@ function show_board_final()
             var name = values[0];
             var score = values[1];
 
-            document.getElementById("board").innerHTML += `<h1 id="ranki">${step+1} : ${name} Score: ${score}</h1>`;
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${n}</h3>`;
 
         }
 
         await sleep(1000);
 
-        document.getElementById("board").style.opacity = "1";
+        document.getElementById("leader").style.opacity = "1";
     }
 }
 
@@ -454,11 +437,6 @@ function show_names(c)
         }
         
     }
-}
-
-for (let step=0; step<80; step++)
-{
-    document.getElementById(`group`).innerHTML += `<h3 class="item">123456789123456</h3>`;
 }
 
 function hover(obj)
