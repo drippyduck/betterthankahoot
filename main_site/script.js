@@ -49,6 +49,7 @@ async function update_alert(message)
     await sleep(500);
     document.getElementById("alert").innerText = `${message}`;
 
+    /*
     var l = parseInt(document.getElementById("alert").innerText.length);
 
     if(l<=100)
@@ -67,6 +68,7 @@ async function update_alert(message)
     {
         document.getElementById("alert").style.cssText = "font-size: 75%;font-size: 3.5vh;";
     } 
+    */
 
     await sleep(500);
 
@@ -88,6 +90,22 @@ async function update_m2(message)
 
 async function spawn_buttons(a,b,c,d)
 {
+    document.getElementById("a").style.cssText = `
+    border-color: black;
+    border-width: 0px;
+        `
+    document.getElementById("b").style.cssText = `
+    border-color: black;
+    border-width: 0px;
+    `
+    document.getElementById("c").style.cssText = `
+    border-color: black;
+    border-width: 0px;
+    `
+    document.getElementById("d").style.cssText = `
+    border-color: black;
+    border-width: 0px;
+    `
     document.getElementById("a").innerText = `${a}`;
     document.getElementById("b").innerText = `${b}`;
     document.getElementById("c").innerText = `${c}`;
@@ -122,6 +140,11 @@ async function update_profile(a,b,c)
     document.getElementById("score").innerText = `Score: ${c}`;
 
     document.getElementById("profile").style.opacity = "1";
+}
+
+function spawn_fireworks()
+{
+    document.getElementById("f1").style.display = `inline`;
 }
 
 // main.js part
@@ -244,92 +267,43 @@ function connect_all()
                 else if(j.command == "win")
                 {
                     xhr = new XMLHttpRequest();
-                    xhr.open("GET", `http://${domain}:8000/api/getWinner2?group=${groups[index]}`, true);
+                    xhr.open("GET", `http://${domain}:8000/api/getUser?id=${id}`, true);
                     xhr.send();
 
                     xhr.onload = async function() {
                         var resp = xhr.responseText;
-                        var list = JSON.parse(resp).winners;
+                        var g = JSON.parse(resp).group;
 
-                        if(list.includes(id))
+                        if(g == groups[index+1])
                         {
-                            // get position of id
-                            // if group a and pos == 5 or more
-                            // stay in group and wait
-                            var check = false;
-
-                            if(groups[index] == "a" && list.length > 4)
-                            {
-                                for (let i = 4; i < list.length; i++) 
-                                {
-                                    if(id == list[i])
-                                    {
-                                        check=true;
-                                    }
-                                }
-                            }
-                            else if(groups[index] == "b" && list.length > 15)
-                            {
-                                for (let i = 4; i < list.length; i++) 
-                                {
-                                    if(id == list[i])
-                                    {
-                                        check=true;
-                                    }
-                                }
-                            }
-                            else if(groups[index] == "c" && list.length > 5)
-                            {
-                                for (let i = 4; i < list.length; i++) 
-                                {
-                                    if(id == list[i])
-                                    {
-                                        check=true;
-                                    }
-                                }
-                            }
-                            else if(groups[index] == "d" && list.length > 1)
-                            {
-                                for (let i = 4; i < list.length; i++) 
-                                {
-                                    if(id == list[i])
-                                    {
-                                        check=true;
-                                    }
-                                }
-                            }
-
-                            if(check)
-                            {
-                                await update_m2("Waiting for additional questions...");
-                                get_profile_v2();
-                            }
-                            else
-                            {
-                                advance();
-                            }
+                            advance();
                         }
-                        else
+                        else if(g == "l")
                         {
                             await update_m2("You lost!");
                             await sleep(10000);
                             window.location.reload();
+                        }
+                        else
+                        {
+                            await update_m2("Waiting for extra questions...");
                         }
                     }
                 }
                 else if(j.command == "final")
                 {
                     xhr = new XMLHttpRequest();
-                    xhr.open("GET", `http://${domain}:8000/api/getWinner2?group=${groups[index]}`, true);
+                    xhr.open("GET", `http://${domain}:8000/api/getUser?id=${id}`, true);
                     xhr.send();
 
                     xhr.onload = async function() {
                         var resp = xhr.responseText;
-                        var list = JSON.parse(resp).winners;
+                        var g = JSON.parse(resp).group;
 
-                        if(list.includes(id))
+                        if(g == "f")
                         {
                             await update_m2("Finals winner!");
+                            spawn_fireworks();
                             await sleep(10000);
                             window.location.reload();
                         }
@@ -437,7 +411,7 @@ function send_answer(a,obj)
     if(!s)
     {
         document.getElementById(obj.id).style.cssText = `
-            border-color: red;
+            border-color: cyan;
             border-width: 5px;
         `
         s=true;
@@ -482,7 +456,7 @@ function get_question()
     {
         document.getElementById(ans).style.cssText = `
                 border-color: black;
-                border-width: 3px;
+                border-width: 0px;
             `
         s=false;
     }

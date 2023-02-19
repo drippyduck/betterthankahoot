@@ -58,10 +58,6 @@ groups = {
 }
 
 ids = {}
-group_a_winners = []
-group_b_winners = []
-group_c_winners = []
-group_d_winners = []
 
 id=1
 stat=0
@@ -199,7 +195,10 @@ async def get_winner(group: str):
 
     last_score = 0
     
-    l={}
+    l={"10":{"name":"test","score":100},
+       "11":{"name":"test","score":100},
+       "12":{"name":"test","score":100},
+       "13":{"name":"test","score":0}}
 
     for elem in ids:
         if ids[elem]["group"] == group:
@@ -218,76 +217,50 @@ async def get_winner(group: str):
             if i+1 == wanted:
                 last_score = score
             elif i+1 > wanted and score != last_score:
+                
+                for key in ids:
+                    if ids[key]["id"] == str(l[i]):
+                        ids[key]["group"] = "l"
+
                 l.remove(l[i])
 
-
     for elem in list(l):
-
-        if group == "a":
-            if elem[0] not in group_a_winners:
-                group_a_winners.append(elem[0])
-        elif group == "b":
-            if elem[0] not in group_b_winners:
-                group_b_winners.append(elem[0])
-        elif group == "c":
-            if elem[0] not in group_c_winners:
-                group_c_winners.append(elem[0])
-        elif group == "d":
-            if elem[0] not in group_d_winners:
-                group_d_winners.append(elem[0])
-
-        winners["winners"].append(elem[0])
-
-    """
+        winners["winners"].append(elem)
+        
     if( group=="d" and len(list(l)) == 1):
-        for elem in ids:
-            if ids[elem]["id"] in list(winners["winners"]):
-                group_d_winners.append(str(ids[elem]["id"]))
-    """
-    if( group=="c" and len(list(l)) == 5):
-        #group_c_winners.clear()
 
         for elem in ids:
-                    if ids[elem]["id"] == l[i][0]:
-                        ids[elem]["group"] = "d"
-                        ids[elem]["score"] = 0
+            for e in list(l):
+                if ids[elem]["id"] == e[0]:
+                    ids[elem]["group"] = "f"
+                    ids[elem]["score"] = 0
 
-    elif( group=="b" and len(list(l)) == 15):
-        #group_b_winners.clear()
+    elif( group=="c" and len(list(l)) <= 5):
 
         for elem in ids:
-            if ids[elem]["id"] == l[i][0]:
-                ids[elem]["group"] = "c"
-                ids[elem]["score"] = 0
+            for e in list(l):
+                if ids[elem]["id"] == e[0]:
+                    ids[elem]["group"] = "d"
+                    ids[elem]["score"] = 0
 
-    elif( group=="a" and len(list(l)) == 4):
-        #group_a_winners.clear()
+    elif( group=="b" and len(list(l)) <= 15):
+
         for elem in ids:
-            if ids[elem]["id"] == l[i][0]:
-                ids[elem]["group"] = "b"
-                ids[elem]["score"] = 0
+            for e in list(l):
+                if ids[elem]["id"] == e[0]:
+                    ids[elem]["group"] = "c"
+                    ids[elem]["score"] = 0
+
+    elif( group=="a" and len(list(l)) <= 4):
+
+        for elem in ids:
+            for e in list(l):
+                if ids[elem]["id"] == e[0]:
+                    ids[elem]["group"] = "b"
+                    ids[elem]["score"] = 0
+                
     
     return winners
-
-
-@app.get("/api/getWinner2")
-async def get_winner2(group: str):
-    l=[]
-
-    if group == "a":
-        for elem in group_a_winners:
-            l.append(elem)
-    elif group == "b":
-        for elem in group_b_winners:
-            l.append(elem)
-    elif group == "c":
-        for elem in group_c_winners:
-            l.append(elem)
-    elif group == "d":
-        for elem in group_d_winners:
-            l.append(elem)
-
-    return {"winners":l}
     
 
 @app.post("/api/submitAnswer")
@@ -345,6 +318,6 @@ async def disconnect(request: Request):
 async def get_user(id: str):
     for key in ids:
         if ids[key]["id"] == id:
-            return {"name":ids[key]["name"],"score":ids[key]["score"]}
+            return {"name":ids[key]["name"],"score":ids[key]["score"],"group":ids[key]["group"]}
 
     return {"name":""}

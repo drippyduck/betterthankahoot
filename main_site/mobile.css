@@ -1,4 +1,11 @@
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 650px) {
+*
+{
+    font-family: 'Odibee Sans', cursive;
+    transition: .25s ease;
+    box-sizing: border-box;
+}
+
 #buttons button
 {
     width: 200px;
@@ -8,97 +15,94 @@
     left: 37%;
     top: 10%;
     margin-top: 5px;
-    border-width: 0px;
     margin-bottom: 20px;
     border: solid;
     border-color: black;
     border-radius: 15px;
     display: block;
-}
-
-*
-{
-    font-family: 'Montserrat', sans-serif;
-    transition: .25s ease;
-    box-sizing: border-box;
+    font-size: 2vh;
+    font-weight: bold;
 }
 
 body
 {
-    width: 100%;
-    height: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
+    background-image: url('https://i.pinimg.com/originals/1d/26/c5/1d26c5b022c071fb8f1e3ae2f0f65ba9.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #main
 {
-    scale: 0.7;
     position: absolute;
     display: grid;
-    border: solid;
-    border-color: black;
-    border-radius: 40px;
-    top: 40%;
-    left: 32%;
-    opacity: 1;
+    top: 50%;
+    left: 87%;
+    width: 700px;
     transform: translate(-50%, -50%);
     padding: 0px 40px 40px 40px;
     transition: 1.2s ease;
-    border-width: 5px;
-    background-color: rgb(45, 45, 165);
+    opacity: 1;
 }
 
 #main_title
 {
-    margin-left: 18%;
-    padding-bottom: 15px;
-    font-size: 64px;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    text-decoration: underline;
+    font-size: 10vh;
+    font-family: 'Odibee Sans', cursive;
+    color: red;
+    -webkit-text-stroke: 4px black;
 }
 
 #main_input
 {
-    margin-left: 2%;
+    margin-left: 3%;
     margin-bottom: 15px;
-    width: 350px;
+    width: 300px;
     height: 50px;
-    border-radius: 5px;
+    border-radius: 4px;
     border-color: black;
+    border-width: 1px;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 3.5vh;
 }
 
 #main_button
 {
-    width: 200px;
-    margin-left: 25%;
-    border-radius: 5px;
+    margin-left: 3%;
+    width: 300px;
+    border-radius: 4px;
     height: 40px;
-    border-color: black;
-    background-color: hsl(233deg 36% 38%);
-    color: white;
+    border-width: 5px;
+    background-color: yellow;
     margin-top: 5px;
-    border-width: 2px;
-    font-size: 20px;
-    border-color: white;
+    border-width: 0px;
+    font-size: 3.5vh;
+    color: black;
+    border-color: black;
 }
 
 #message
 {
+    overflow: hidden;
     position: absolute;
-    top: 27%;
     left: 51%;
+    margin-top: 67%;
     transform: translate(-50%, -50%);
-    opacity: 1;
-    width: 70%;
+    opacity: 0;
+    height: 30%;
+    width: 75%;
     transition: .4s ease;
     text-align: center;
-    margin-top: 25px;
+    font-size: 2.5vh;
+    padding-top: 10%;
+}
+
+#alert
+{
+    font-size: 100%;
 }
 
 #profile
@@ -109,6 +113,12 @@ body
     width: 30%;
     font-size: 12px;
 }
+
+#f1
+        {
+            display: none;
+        }
+
 
 #buttons
 {
@@ -169,8 +179,8 @@ body
     margin-top: 80px;
     transform: translate(-50%, -50%);
     border-radius: 15px;
-    width: 7vh;
-    height: 65px;
+    width: 10vh;
+    height: 70px;
     text-align: center;
     vertical-align: middle;
     background-color: lightblue;
@@ -187,6 +197,8 @@ body
     border: solid;
     position: absolute;
     background-color: yellow;
+    font-size: 2vh;
+    top: 95%;
 }
 
 #reset:hover
