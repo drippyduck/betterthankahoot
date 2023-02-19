@@ -14,27 +14,27 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        var id="10";
-
-        function check_winner()
-        {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", `http://192.168.11.110:8000/api/getWinner2?group=a`, true);
-            xhr.send();
-
-            xhr.onload = function() {
-                var resp = xhr.responseText;
-                var list = JSON.parse(resp).winners;
-
-                if(list.includes(id))
-                {
-                    alert("YOu won!");
-                }
-            }
-        }
-    </script>
-
-    <button onclick="check_winner()">click</button>
+    <style>
+        #timer
+{
+    border: solid;
+    border-color: black;
+    position: absolute;
+    left: 50%;
+    margin-top: 80px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 10vh;
+    height: 10vh;
+    text-align: center;
+    vertical-align: middle;
+    background-color: lightblue;
+    opacity: 1;
+}
+    </style>
+    
+    <span id="timer">
+        <h1 id="t">10</h1>
+    </span>
 </body>
 </html>

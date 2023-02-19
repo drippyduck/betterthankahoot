@@ -220,6 +220,7 @@ function connect_all()
     var name = document.getElementById("main_input").value;
     xhr.open("POST", `http://${domain}:8000/api/register`, true);
     xhr.send(`{"name":"${name}"}`);
+    document.cookie=``;
 
     xhr.onload = function() {
             var resp = xhr.responseText;

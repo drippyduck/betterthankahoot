@@ -39,9 +39,9 @@ body
 {
     position: absolute;
     display: grid;
-    top: 50%;
-    left: 87%;
-    width: 700px;
+    top: 45%;
+    left: 50%;
+    width: 400px;
     transform: translate(-50%, -50%);
     padding: 0px 40px 40px 40px;
     transition: 1.2s ease;
@@ -54,11 +54,12 @@ body
     font-family: 'Odibee Sans', cursive;
     color: red;
     -webkit-text-stroke: 4px black;
+    margin-left: 23%;
 }
 
 #main_input
 {
-    margin-left: 3%;
+    margin-left: 4%;
     margin-bottom: 15px;
     width: 300px;
     height: 50px;
@@ -71,7 +72,7 @@ body
 
 #main_button
 {
-    margin-left: 3%;
+    margin-left: 4%;
     width: 300px;
     border-radius: 4px;
     height: 40px;
@@ -89,7 +90,7 @@ body
     overflow: hidden;
     position: absolute;
     left: 51%;
-    margin-top: 67%;
+    margin-top: 69%;
     transform: translate(-50%, -50%);
     opacity: 0;
     height: 30%;
@@ -97,7 +98,6 @@ body
     transition: .4s ease;
     text-align: center;
     font-size: 2.5vh;
-    padding-top: 10%;
 }
 
 #alert
@@ -111,13 +111,13 @@ body
     position: absolute;
     left: 70%;
     width: 30%;
-    font-size: 12px;
+    font-size: 1.7vh;
 }
 
 #f1
-        {
-            display: none;
-        }
+{
+    display: none;
+}
 
 
 #buttons
@@ -126,9 +126,9 @@ body
     top: 120%;
     left: 52%;
     transform: translate(-50%, -50%);
-    margin-top: 100px;
+    margin-top: 10%;
     width: 750px;
-    height: 500px;
+    height: 40%;
     opacity: 0;
 }
 
@@ -143,6 +143,7 @@ body
     height: 250px;
     text-align: center;
     opacity: 1;
+    font-size: 3vh;
 }
 
 #main_m2
@@ -179,11 +180,12 @@ body
     margin-top: 80px;
     transform: translate(-50%, -50%);
     border-radius: 15px;
-    width: 10vh;
-    height: 70px;
+    width: 7vh;
+    height: 7vh;
     text-align: center;
     vertical-align: middle;
     background-color: lightblue;
+    padding-bottom: 15%;
     opacity: 0;
 }
 
