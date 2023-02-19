@@ -1,103 +1,97 @@
-@media only screen and (max-width: 850px) {
-#buttons button
-{
-    width: 200px;
-    height: 8vh;
-    scale: 1.2;
-    position: relative;
-    left: 37%;
-    top: 10%;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: solid;
-    border-color: black;
-    border-radius: 15px;
-    display: block;
-}
-
 *
 {
-    font-family: "Roboto Mono", sans-serif; 
+    font-family: 'Odibee Sans', cursive;
+
+
     transition: .25s ease;
     box-sizing: border-box;
 }
 
 body
 {
-    width: 100%;
-    height: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
+    background-image: url('https://i.pinimg.com/originals/1d/26/c5/1d26c5b022c071fb8f1e3ae2f0f65ba9.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #main
 {
     position: absolute;
     display: grid;
-    border: solid;
-    border-color: black;
-    border-radius: 40px;
     top: 50%;
     left: 50%;
+    width: 700px;
     transform: translate(-50%, -50%);
     padding: 0px 40px 40px 40px;
     transition: 1.2s ease;
+    opacity: 1;
 }
 
 #main_title
 {
-    padding-bottom: 5px;
+    font-size: 17vh;
+    font-family: 'Odibee Sans', cursive;
+    color: red;
+    -webkit-text-stroke: 4px black;
 }
 
 #main_input
 {
+    margin-left: 25%;
     margin-bottom: 15px;
-    width: 200px;
-    height: 30px;
-    border-radius: 15px;
+    width: 300px;
+    height: 50px;
+    border-radius: 4px;
     border-color: black;
-    border-width: 4px;
+    border-width: 1px;
     text-align: center;
+    font-size: 3.5vh;
 }
 
 #main_button
 {
-    width: 100px;
-    margin-left: 55px;
-    border-radius: 15px;
+    margin-left: 25%;
+    width: 300px;
+    border-radius: 4px;
     height: 40px;
-    border-color: black;
+    border-width: 5px;
     background-color: yellow;
-    border-width: 4px;
     margin-top: 5px;
+    border-width: 0px;
+    font-size: 3.5vh;
+    color: black;
+    border-color: black;
 }
 
 #message
 {
+    overflow: hidden;
     position: absolute;
-    top: 27%;
-    left: 51%;
+    left: 50%;
+    top: 30%;
     transform: translate(-50%, -50%);
     opacity: 0;
-    width: 70%;
+    height: 15%;
+    width: 75%;
     transition: .4s ease;
     text-align: center;
-    font-size: 10px;
-    margin-top: 25px;
 }
 
-#alert
+#f1
 {
-    font-size: 100%;
+    display: none;
 }
 
 #profile
 {
     opacity: 0;
     position: absolute;
-    left: 70%;
-    width: 30%;
-    font-size: 12px;
+    margin-left: 90%;
+    font-size: 2.5vh;
 }
 
 #buttons
@@ -106,20 +100,38 @@ body
     top: 120%;
     left: 52%;
     transform: translate(-50%, -50%);
-    margin-top: 100px;
+    margin-top: 10%;
     width: 750px;
     height: 500px;
     opacity: 0;
 }
 
 
+#buttons button
+{
+    width: 200px;
+    height: 100px;
+    scale: 1.5;
+    margin-left: 100px;
+    margin-bottom: 60px;
+    margin-right: 5px;
+    border-width: 0px;
+    border: solid;
+    border-color: black;
+    border-radius: 15px;
+    font-size: 2.5vh;
+    font-weight: bold;
+}
+
+
 #main_message
 {
     position: absolute;
-    top: 50%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    font-size: 3vh;
+    width: 700px;
     height: 250px;
     text-align: center;
     opacity: 1;
@@ -155,11 +167,11 @@ body
     border: solid;
     border-color: black;
     position: absolute;
+    top: 7%;
     left: 50%;
-    margin-top: 80px;
     transform: translate(-50%, -50%);
     border-radius: 15px;
-    width: 10vh;
+    width: 100px;
     height: 70px;
     text-align: center;
     vertical-align: middle;
@@ -177,6 +189,8 @@ body
     border: solid;
     position: absolute;
     background-color: yellow;
+    font-size: 2.5vh;
+    top: 95%;
 }
 
 #reset:hover
@@ -187,5 +201,4 @@ body
 #main_button:hover
 {
     cursor: pointer;
-}
 }

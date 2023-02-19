@@ -1,12 +1,12 @@
 var domain='192.168.11.110'
 var ws;
 
-if(!(navigator.userAgent.match(/firefox/i)))
+/*if(!(navigator.userAgent.match(/firefox/i)))
 {
     //update_m2('Please use a firefox or safari browser!');
     //document.getElementById("main").style.display = "none";
     //document.getElementById("main").style.top = "250%";
-}
+}*/
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -21,10 +21,28 @@ async function change_state()
             document.getElementById("message").style.opacity = "0";
             await sleep(500);
         }
-        
-        document.getElementById("main").style.top = "250%";
-        await sleep(500);
-        connect_all();
+
+        xhr = new XMLHttpRequest();
+        xhr.open("GET", `http://${domain}:8000/api/checkName?name=${document.getElementById("main_input").value}`, true);
+        xhr.send();
+
+        xhr.onload = async function() {
+            var resp = xhr.responseText;
+            var s = JSON.parse(resp).success;
+
+            if (s == "true")
+            {
+                
+                document.getElementById("main").style.top = "250%";
+                await sleep(500);
+                connect_all();
+            }
+            else
+            {
+                document.getElementById("alert").innerText = "Name taken...";
+                document.getElementById("message").style.opacity = "1";
+            }
+        }
     }
     else
     {

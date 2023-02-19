@@ -73,11 +73,12 @@ body
     overflow: hidden;
     position: absolute;
     left: 50%;
-    top: 30%;
+    top: 57%;
     transform: translate(-50%, -50%);
     opacity: 0;
     height: 15%;
     width: 75%;
+    font-size: 3vh;
     transition: .4s ease;
     text-align: center;
 }

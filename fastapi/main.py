@@ -314,6 +314,17 @@ async def disconnect(request: Request):
 
     return {"success":"true"}
 
+@app.get("/api/checkName")
+async def get_user(name: str):
+    if len(name) > 12:
+        return {"success":"false"}
+
+    for key in ids:
+        if ids[key]["name"] == name:
+            return {"success":"false"}
+
+    return {"success":"true"}
+
 @app.get("/api/getUser")
 async def get_user(id: str):
     for key in ids:

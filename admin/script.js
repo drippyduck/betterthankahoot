@@ -439,9 +439,7 @@ function show_names(c)
     xhr.onload = function(){
         var l = JSON.parse(xhr.responseText);
 
-        document.getElementById(`group_a`).innerHTML = ``;
-        document.getElementById(`group_b`).innerHTML = ``;
-        document.getElementById(`group_c`).innerHTML = ``;
+        document.getElementById(`group`).innerHTML = ``;
 
         for (let step = 0; step < c-1; step++) 
         {
@@ -452,10 +450,15 @@ function show_names(c)
                 users.push(n);
             }
 
-            document.getElementById(`group_${g}`).innerHTML += `<h3 id="item">${n}</h3>`;
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${n}</h3>`;
         }
         
     }
+}
+
+for (let step=0; step<80; step++)
+{
+    document.getElementById(`group`).innerHTML += `<h3 class="item">123456789123456</h3>`;
 }
 
 function hover(obj)
