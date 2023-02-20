@@ -177,8 +177,9 @@ async def get_rate(group: str):
             id = ids[elem]["id"]
             score = ids[elem]["score"]
             name = ids[elem]["name"]
+            group = ids[elem]["group"]
 
-            l[id] = {"name":name,"score":score}
+            l[id] = {"name":name,"score":score,"group":group}
 
     return sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
 
@@ -310,7 +311,7 @@ async def disconnect(request: Request):
 
     for elem in ids.copy():
         if elem == q:
-            if ids[elem]["group"] != "d":
+            if ids[elem]["group"] != "f":
                 groups[ids[elem]["group"]] += 1
             del ids[elem]
 

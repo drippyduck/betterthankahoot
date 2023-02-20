@@ -43,6 +43,24 @@
     padding-top: 27%;
 }
 
+#winner
+{
+    background: url("http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/27baf734c77bbd0.png");
+    background-size: 100% 100%;
+    width: 20%;
+    height: 300px;
+    padding-top: 7%;
+    font-family: 'Bungee', cursive;
+    color: gold;
+    -webkit-text-stroke: 4px black;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: none;
+    transform: translate(-50%, -50%);
+}
+
 #titles
 {
     display: flex;

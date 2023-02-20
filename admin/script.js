@@ -57,6 +57,7 @@ async function update_m2(message)
     await sleep(500);
     document.getElementById("main_m2").innerText = `${message}`;
     await sleep(500);
+    document.getElementById("main_message").style.opacity = "1";
     document.getElementById("main_m2").style.opacity = "1";
 }
 
@@ -70,6 +71,11 @@ async function spawn_buttons(a,b,c,d)
     document.getElementById("d").innerText = `${d}`;
 
     document.getElementById("buttons").style.opacity = "1";
+}
+
+function spawn_fireworks()
+{
+    document.getElementById("f1").style.display = `inline`;
 }
 
 async function update_profile(a,b,c)
@@ -149,11 +155,6 @@ function connect_all()
         {
             var j = JSON.parse(event.data.replaceAll(`'`, `"`));
 
-            if(j.group)
-            {
-                group=j.group;
-            }
-
             if(j.command == "ready")
             {
                 document.getElementById("board").style.opacity = "0";
@@ -171,7 +172,7 @@ function connect_all()
             }
             else if(j.command == "board")
             {
-                show_board();
+                show_board_tmp();
             }
             
             if(ready)
@@ -189,13 +190,11 @@ function connect_all()
                 }
                 else if(j.command == "win")
                 {
-                    await update_m2(`Group ${groups[index]} Leaderboard:`);
+                    //await update_m2(`Group ${groups[index]} Leaderboard:`);
                     show_board();
-                    index+=1;
                 }
                 else if(j.command == "final")
                 {
-                    await update_m2(`Finals Leaderboard:`);
                     show_board_final();
                 }
             }
@@ -295,11 +294,75 @@ function show_rate()
 function show_board()
 {
     xhr = new XMLHttpRequest();
-    xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${group}`, true);
+    xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${groups[index]}`, true);
     xhr.send();
 
     xhr.onload = async function()
     {
+
+        document.getElementById("leader").style.opacity = "0";
+
+        var elem = ["message","buttons","rates","timer"];
+        var elems2  = [];
+
+        elem.forEach(function(dv)
+        {
+            // check if visible, if yes opacity = 0
+            var l = window.getComputedStyle(document.getElementById(dv)).opacity.toString();
+            
+            if(l.localeCompare("0"))
+            {
+                elems2.push(dv);
+                document.getElementById(dv).style.opacity = "0";
+            }
+            // else remove from lise
+        });
+
+        var l = JSON.parse(xhr.responseText);
+        var s=l.length;
+        var check=false;
+
+        document.getElementById("group").innerHTML = ``;
+
+        for (let step = 0; step < s; step++) 
+        {
+            var values = Object.values(l[step][1]);
+
+            var name = values[0];
+            var score = values[1];
+            var g = values[2];
+
+            if(g==groups[index])
+            {
+                check=true;
+            }
+
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
+
+        }
+
+        if(!check)
+        {
+            await update_m2(`Moving to the next round`);
+            index+=1;
+        }
+        else
+        {
+            await update_m2(`Waiting for additional questions...`);
+        }
+
+        document.getElementById("leader").style.opacity = "1";
+
+    }
+}
+
+function show_board_tmp()
+{
+    xhr = new XMLHttpRequest();
+    xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${groups[index]}`, true);
+    xhr.send();
+
+    xhr.onload = async function(){
 
         document.getElementById("leader").style.opacity = "0";
 
@@ -335,7 +398,20 @@ function show_board()
 
         }
 
+        await sleep(500);
+
+        await update_m2(`Current players: `);
         document.getElementById("leader").style.opacity = "1";
+
+        await sleep(2000);
+
+        document.getElementById("leader").style.opacity = "0";
+        document.getElementById("main_message").style.opacity = "0";
+
+        for ( var i=0; i<elems2.length; i++)
+        {
+            document.getElementById(elems2[i]).style.opacity = "1";
+        }
 
     }
 }
@@ -343,15 +419,17 @@ function show_board()
 function show_board_final()
 {
     xhr = new XMLHttpRequest();
-    xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${group}`, true);
+    xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${groups[index]}`, true);
     xhr.send();
 
-    xhr.onload = async function(){
-
+    xhr.onload = async function()
+    {
+        
         document.getElementById("leader").style.opacity = "0";
 
-        var elem = ["message","buttons","timer","leader"];
+        var elem = ["message","buttons","rates","timer"];
         var elems2  = [];
+        var winner;
 
         elem.forEach(function(dv)
         {
@@ -368,6 +446,7 @@ function show_board_final()
 
         var l = JSON.parse(xhr.responseText);
         var s=l.length;
+        var check=false;
 
         document.getElementById("group").innerHTML = ``;
 
@@ -377,14 +456,30 @@ function show_board_final()
 
             var name = values[0];
             var score = values[1];
+            var g = values[2];
 
-            document.getElementById(`group`).innerHTML += `<h3 class="item">${n}</h3>`;
+            if(g=="f")
+            {
+                winner=name;
+            }
+
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
 
         }
 
-        await sleep(1000);
+        if(winner)
+        {
+            await update_m2(`The winner is: `);
+            document.getElementById(`winner`).innerText = `${winner}`;
+            document.getElementById(`winner`).style.display = `inline`;
+            spawn_fireworks();
+        }
+        else
+        {
+            await update_m2(`Waiting for additional questions...`);
+            document.getElementById("leader").style.opacity = "1";
+        }
 
-        document.getElementById("leader").style.opacity = "1";
     }
 }
 
