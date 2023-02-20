@@ -84,7 +84,11 @@ body
 
 #f1
 {
+    margin-left: 10%;
+    margin-top: 5%;
+    position: absolute;
     display: none;
+    z-index: -1;
 }
 
 #profile

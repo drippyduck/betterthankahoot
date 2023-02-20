@@ -77,14 +77,11 @@ app.add_middleware(
 def get_group():
     global groups
 
-    if groups["a"] == 0 and groups["b"] == 0 and groups["c"] == 0:
+    if groups["a"] == 0:
         return "n"
-
-    while True:
-        d = random.choice(list(groups.keys()))
-        if groups[d] != 0:
-            groups[d] -= 1
-            return d
+    else:
+        groups["a"] -= 1
+        return "a"
 
 
 @app.get("/")
@@ -143,7 +140,7 @@ def get_reset():
     global id
     global n_per_group
 
-    groups = {"a":n_per_group,"b":0,"c":0}
+    groups = {"a":n_per_group,"b":0,"c":0,"d":0}
     ids={}
     id=1
 

@@ -170,6 +170,10 @@ function connect_all()
             {
                 show_names(j.count);
             }
+            else if(j.command == "reset")
+            {
+                show_names(j.count);
+            }
             else if(j.command == "board")
             {
                 show_board_tmp();

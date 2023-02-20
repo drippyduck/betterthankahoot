@@ -2,8 +2,6 @@
 *
 {
     font-family: 'Odibee Sans', cursive;
-
-
     transition: .25s ease;
     box-sizing: border-box;
 }
@@ -85,7 +83,11 @@ body
 
 #f1
 {
+    margin-left: 10%;
+    margin-top: 5%;
+    position: absolute;
     display: none;
+    z-index: -1;
 }
 
 #profile

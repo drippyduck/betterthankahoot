@@ -123,6 +123,10 @@ def input_loop():
         elif c == "4":
             reset()
 
+            basic["command"] = "reset"
+            basic["count"] = len(CLIENTS)
+            WORD=str(basic)
+
         else:
             if ready:
                 if c == "1" and answered:

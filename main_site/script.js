@@ -323,8 +323,8 @@ function connect_all()
                         {
                             await update_m2("Finals winner!");
                             spawn_fireworks();
-                            await sleep(10000);
-                            window.location.reload();
+                            //await sleep(10000);
+                            //window.location.reload();
                         }
                         else
                         {
@@ -343,6 +343,10 @@ function connect_all()
             }
             
             if(j.command == "close")
+            {
+                ws.close();
+            }
+            else if(j.command == "reset")
             {
                 ws.close();
             }
