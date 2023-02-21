@@ -32,6 +32,7 @@ body
 
 #main_title
 {
+    margin-left: 24%;
     font-size: 17vh;
     font-family: 'Odibee Sans', cursive;
     color: red;
@@ -79,6 +80,22 @@ body
     font-size: 3vh;
     transition: .4s ease;
     text-align: center;
+}
+
+#m2
+{
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    height: 15%;
+    width: 75%;
+    font-size: 3vh;
+    transition: .4s ease;
+    text-align: center;
+    z-index: 1;
 }
 
 #f1

@@ -34,20 +34,21 @@ async function change_state()
             {
                 
                 document.getElementById("main").style.top = "250%";
+                document.getElementById("m2").style.display = "none";
                 await sleep(500);
                 connect_all();
             }
             else
             {
-                document.getElementById("alert").innerText = "Name taken...";
-                document.getElementById("message").style.opacity = "1";
+                document.getElementById("r2").innerText = "Name taken...";
+                document.getElementById("m2").style.opacity = "1";
             }
         }
     }
     else
     {
-        document.getElementById("alert").innerText = "You have to enter your name!";
-        document.getElementById("message").style.opacity = "1";
+        document.getElementById("r2").innerText = "You have to enter your name!";
+        document.getElementById("m2").style.opacity = "1";
     }
 }
 

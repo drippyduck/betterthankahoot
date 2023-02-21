@@ -100,6 +100,21 @@ body
     font-size: 2.5vh;
 }
 
+#m2
+{
+    overflow: hidden;
+    position: absolute;
+    left: 51%;
+    margin-top: 45%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    height: 30%;
+    width: 75%;
+    transition: .4s ease;
+    text-align: center;
+    font-size: 2.5vh;
+}
+
 #alert
 {
     font-size: 100%;
