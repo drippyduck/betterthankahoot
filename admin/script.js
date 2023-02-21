@@ -1,4 +1,4 @@
-var domain='192.168.11.110'
+var domain='10.214.93.207'
 const ws = new WebSocket(`ws://${domain}:5555`);
 var keyword = "b0657d3289bae5be59176613e794ae1bf696c7e2ee529058760fe0b17b0d448f";
 

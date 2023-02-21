@@ -1,4 +1,4 @@
-var domain='192.168.11.110'
+var domain='10.214.93.207'
 var ws;
 
 /*if(!(navigator.userAgent.match(/firefox/i)))
@@ -35,6 +35,7 @@ async function change_state()
                 
                 document.getElementById("main").style.top = "250%";
                 document.getElementById("m2").style.display = "none";
+                document.getElementById("logo").style.opacity = "0";
                 await sleep(500);
                 connect_all();
             }

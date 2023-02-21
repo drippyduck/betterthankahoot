@@ -17,6 +17,17 @@ body
     background-size: cover;
 }
 
+#logo
+{
+    z-index: 100;
+    position: absolute;
+    left: 2%;
+    top: 2%;
+    width: 45%;
+    height: 14%;
+    opacity: 1;
+}
+
 #main
 {
     position: absolute;
