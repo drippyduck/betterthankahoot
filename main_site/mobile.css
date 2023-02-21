@@ -6,24 +6,6 @@
     box-sizing: border-box;
 }
 
-#buttons button
-{
-    width: 200px;
-    height: 8vh;
-    scale: 1.2;
-    position: relative;
-    left: 37%;
-    top: 10%;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: solid;
-    border-color: black;
-    border-radius: 15px;
-    display: block;
-    font-size: 2vh;
-    font-weight: bold;
-}
-
 body
 {
     overflow-x: hidden;
@@ -83,6 +65,7 @@ body
     font-size: 3.5vh;
     color: black;
     border-color: black;
+    font-family: 'Changa One', cursive;
 }
 
 #message
@@ -145,6 +128,26 @@ body
     width: 750px;
     height: 40%;
     opacity: 0;
+}
+
+#buttons button
+{
+    width: 200px;
+    height: 8vh;
+    scale: 1.0;
+    position: relative;
+    left: 37%;
+    top: 10%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-width: 5px;
+    border: solid;
+    border-color: black;
+    border-radius: 15px;
+    display: block;
+    font-size: 2vh;
+    box-shadow: 5px 10px black;
+    font-family: 'Changa One', cursive;
 }
 
 
@@ -216,6 +219,7 @@ body
     background-color: yellow;
     font-size: 2vh;
     top: 95%;
+    font-family: 'Changa One', cursive;
 }
 
 #reset:hover

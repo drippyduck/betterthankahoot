@@ -111,19 +111,23 @@ async function spawn_buttons(a,b,c,d)
 {
     document.getElementById("a").style.cssText = `
     border-color: black;
-    border-width: 0px;
+    border-width: 5px;
+    box-shadow: 5px 10px black;
         `
     document.getElementById("b").style.cssText = `
     border-color: black;
-    border-width: 0px;
+    border-width: 5px;
+    box-shadow: 5px 10px black;
     `
     document.getElementById("c").style.cssText = `
     border-color: black;
-    border-width: 0px;
+    border-width: 5px;
+    box-shadow: 5px 10px black;
     `
     document.getElementById("d").style.cssText = `
     border-color: black;
-    border-width: 0px;
+    border-width: 5px;
+    box-shadow: 5px 10px black;
     `
     document.getElementById("a").innerText = `${a}`;
     document.getElementById("b").innerText = `${b}`;
@@ -435,8 +439,9 @@ function send_answer(a,obj)
     if(!s)
     {
         document.getElementById(obj.id).style.cssText = `
-            border-color: cyan;
+            border-color: black;
             border-width: 5px;
+            box-shadow: 0 0 5px 5px #00ffff;
         `
         s=true;
         ans=obj.id;
@@ -469,7 +474,7 @@ function leave(obj)
     {
         document.getElementById(obj.id).style.cssText = `
             border-color: black;
-            border-width: 0px;
+            border-width: 5px;
         `
     }
 }
@@ -480,7 +485,7 @@ function get_question()
     {
         document.getElementById(ans).style.cssText = `
                 border-color: black;
-                border-width: 0px;
+                border-width: 5px;
             `
         s=false;
     }

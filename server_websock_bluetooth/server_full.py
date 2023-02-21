@@ -13,9 +13,9 @@ ready=False
 sent=False
 answered=True
 index = 0
-question_per_round = 5
+question_per_round = 1
 final_q = 1
-GROUPS = ["a","d"]
+GROUPS = ["a","b","c","d"]
 domain=sys.argv[1]
 limit = int(str(json.loads(requests.get(f"http://{domain}:8000/api/getRows").text)["number"])[1:-1])
 questions = []
@@ -72,18 +72,21 @@ def add_question(r):
             questions.append(elem)
             i+=1
 
+def start_timer():
+    requests.get(f"http://{domain}:8000/api/startTimer")
+    print("FInished timwer")
+
 def input_loop():
     global WORD
     global basic
     global count
     global CLIENTS
+    global ready
+    global sent
+    global index
+    global question_per_round
+    global GROUPS
     global answered
-
-    ready=False
-    sent=False
-
-    index = 0
-    GROUPS = ["a","d"]
 
     server_sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
 
@@ -151,6 +154,10 @@ def input_loop():
         elif c == "4":
             reset()
 
+            basic["command"] = "reset"
+            basic["count"] = len(CLIENTS)
+            WORD=str(basic)
+
         else:
             if ready:
                 if c == "1" and answered:
@@ -161,24 +168,31 @@ def input_loop():
                         basic["group"] = GROUPS[index]
                         WORD=str(basic)
 
+                        print(f"Sent question to group {GROUPS[index]}")
                         sent=True
                         answered=False
 
                     else:
                         try:
 
-                            w = requests.get(f"http://{domain}:8000/api/getWinner?group={GROUPS[index]}").text
+                            w = list(json.loads(requests.get(f"http://{domain}:8000/api/getWinner?group={GROUPS[index]}").text)["winners"])
+
+                            #print(f"{w} : {len(w)}")
                             
-                            print(w)
-                            
-                            if len(list(json.loads(w)["winners"])) > 1:
+                            if (len(w) > 30 and GROUPS[index] == "a") or (len(w) > 15 and GROUPS[index] == "b") or (len(w) > 5 and GROUPS[index] == "c") or (len(w) > 1 and GROUPS[index] == "d"):
                                 print("More questions!!")
                                 add_question(1)
 
+                                if GROUPS[index] == "d":
+                                    basic["command"] = "final"
+                                else:
+                                    basic["command"] = "win"
+
+                                WORD = str(basic)
+
                             else:
 
-                                id = list(json.loads(w)['winners'])[0]
-                                print(f"Queue is empty and we have a winner with id {id}!")
+                                print(f"Queue is empty and we can move to next round!")
 
                                 if GROUPS[index] == "d":
                                     basic["command"] = "final"
@@ -186,7 +200,6 @@ def input_loop():
                                     basic["command"] = "win"
 
                                 basic["group"] = GROUPS[index]
-                                basic["id"] = str(id)
                                 WORD=str(basic)
 
                                 ready=False
@@ -214,7 +227,7 @@ def input_loop():
                         WORD=str(basic)
 
                         time.sleep(1)
-                        requests.get(f"http://{domain}:8000/api/startTimer")
+                        threading.Thread(target=start_timer).start()
                         sent=False
                         answered=True
 
