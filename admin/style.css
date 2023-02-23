@@ -161,21 +161,29 @@ body
 #a
 {
     background-color: red;
+    opacity: 0;
+    transition: .4s ease;
 }
 
 #b
 {
     background-color: blue;
+    opacity: 0;
+    transition: .4s ease;
 }
 
 #c
 {
     background-color: yellow;
+    opacity: 0;
+    transition: .4s ease;
 }
 
 #d
 {
     background-color: green;
+    opacity: 0;
+    transition: .4s ease;
 }
 
 #timer

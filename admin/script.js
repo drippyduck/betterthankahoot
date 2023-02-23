@@ -1,4 +1,4 @@
-var domain='10.214.93.207'
+var domain='192.168.11.107'
 const ws = new WebSocket(`ws://${domain}:5555`);
 var keyword = "b0657d3289bae5be59176613e794ae1bf696c7e2ee529058760fe0b17b0d448f";
 
@@ -65,12 +65,41 @@ async function spawn_buttons(a,b,c,d)
 {
     document.getElementById("leader").style.opacity = "0";
 
+    document.getElementById("a").style.opacity = "0";
+    document.getElementById("b").style.opacity = "0";
+    document.getElementById("c").style.opacity = "0";
+    document.getElementById("d").style.opacity = "0";
+
     document.getElementById("a").innerText = `${a}`;
     document.getElementById("b").innerText = `${b}`;
     document.getElementById("c").innerText = `${c}`;
     document.getElementById("d").innerText = `${d}`;
 
+    document.getElementById("rate_a").innerHTML = ``;
+    document.getElementById("rate_b").innerHTML = ``;
+    document.getElementById("rate_c").innerHTML = ``;
+    document.getElementById("rate_d").innerHTML = ``;
+
+    document.getElementById("rate_a").innerHTML = `<h1>${a}</h1>`;
+    document.getElementById("rate_b").innerHTML = `<h1>${b}</h1>`;
+    document.getElementById("rate_c").innerHTML = `<h1>${c}</h1>`;
+    document.getElementById("rate_d").innerHTML = `<h1>${d}</h1>`;
+
+    document.getElementById(`rate_a`).style.boxShadow = `none`;
+    document.getElementById(`rate_b`).style.boxShadow = `none`;
+    document.getElementById(`rate_c`).style.boxShadow = `none`;
+    document.getElementById(`rate_d`).style.boxShadow = `none`;
+
     document.getElementById("buttons").style.opacity = "1";
+    
+    await sleep(1000);
+    document.getElementById("a").style.opacity = "1";
+    await sleep(1000);
+    document.getElementById("b").style.opacity = "1";
+    await sleep(1000);
+    document.getElementById("c").style.opacity = "1";
+    await sleep(1000);
+    document.getElementById("d").style.opacity = "1";
 }
 
 function spawn_fireworks()
@@ -87,6 +116,14 @@ async function update_profile(a,b,c)
     document.getElementById("score").innerText = `Score: ${c}`;
 
     document.getElementById("profile").style.opacity = "1";
+}
+
+function reset_op()
+{
+    document.getElementById("a").style.opacity = "0";
+    document.getElementById("b").style.opacity = "0";
+    document.getElementById("c").style.opacity = "0";
+    document.getElementById("d").style.opacity = "0";
 }
 
 // main.js part
@@ -184,6 +221,7 @@ function connect_all()
                 if(j.command == "go")
                 {
                     question = j.question;
+                    reset_op();
                     get_question();
                 }
                 else if(j.command == "start")
@@ -220,10 +258,16 @@ function get_question()
     else
     {
         document.getElementById("rates").style.opacity = "0";
+        document.getElementById("rate_a").style.opacity = "0";
+        document.getElementById("rate_b").style.opacity = "0";
+        document.getElementById("rate_c").style.opacity = "0";
+        document.getElementById("rate_d").style.opacity = "0";
+
         document.getElementById("buttons").style.top = "60%";
     }
 
     document.getElementById("leader").style.opacity = "0";
+    document.getElementById("buttons").style.opacity = "0";
     const value = ('; '+document.cookie).split(`; sessionID=`).pop().split(';')[0];
     xhr = new XMLHttpRequest();
     xhr.open("GET", `http://${domain}:8000/api/getQuestion?id=${question}`, true);
@@ -248,50 +292,24 @@ function show_rate()
     xhr.open("GET", `http://${domain}:8000/api/hxhx?code=${keyword}&question=${question}`, true);
     xhr.send();
     
-    xhr.onload = function() 
+    xhr.onload = async function() 
     {
         var txt = JSON.parse(xhr.responseText);
 
         answer = txt.answer;
 
-        document.getElementById(`rate_${String(answer)}`).style.borderColor = `green`;
-        document.getElementById(`rate_${String(answer)}`).style.borderWidth = `4px`;
+        document.getElementById(`rate_${String(answer)}`).style.boxShadow = `0 0 10px 10px #00ffff`;
 
-        xhr = new XMLHttpRequest();
-        xhr.open("GET", `http://${domain}:8000/api/getRates`, true);
-        xhr.send();
+        document.getElementById("message").style.opacity = "0";
+        document.getElementById("buttons").style.opacity = "0";
 
-        xhr.onload = async function(){
-            var t = JSON.parse(xhr.responseText);
-        
-            var total = t.a + t.b + t.c + t.d;
-        
-        if(total===0)
-        {
-           total = 1;
-        }
-        
-            a = Math.trunc((t.a*100)/total);
-            b = Math.trunc((t.b*100)/total);
-            c = Math.trunc((t.c*100)/total);
-            d = Math.trunc((t.d*100)/total);
-        
-        //alert(`total: ${total} a ${t.a} b ${t.b} c ${t.c} d ${t.d}`);
-            
-            document.getElementById("rate_a").innerHTML = `<h1>${a}%</h1>`;
-            document.getElementById("rate_b").innerHTML = `<h1>${b}%</h1>`;
-            document.getElementById("rate_c").innerHTML = `<h1>${c}%</h1>`;
-            document.getElementById("rate_d").innerHTML = `<h1>${d}%</h1>`;
-
-            document.getElementById("rate_a").style.width = `${(a*3)+43}%`;
-            document.getElementById("rate_b").style.width = `${(b*3)+43}%`;
-            document.getElementById("rate_c").style.width = `${(c*3)+43}%`;
-            document.getElementById("rate_d").style.width = `${(d*3)+43}%`;
-
-            document.getElementById("message").style.opacity = "0";
-            document.getElementById("rates").style.opacity = "1";
-            document.getElementById("buttons").style.opacity = "0";  
-        }
+        await sleep(500);
+        document.getElementById("rates").style.opacity = `1`;
+        document.getElementById("rate_a").style.opacity = `1`;
+        document.getElementById("rate_b").style.opacity = `1`;
+        document.getElementById("rate_c").style.opacity = `1`;
+        document.getElementById("rate_d").style.opacity = `1`;
+  
     }
 }
 
@@ -370,7 +388,7 @@ function show_board_tmp()
 
         document.getElementById("leader").style.opacity = "0";
 
-        var elem = ["message","buttons","timer","rates"];
+        var elem = ["message","buttons","timer","rate_a","rate_b","rate_c","rate_d","rates"];
         var elems2  = [];
 
         elem.forEach(function(dv)
@@ -510,28 +528,6 @@ function show_names(c)
             document.getElementById(`group`).innerHTML += `<h3 class="item">${n}</h3>`;
         }
         
-    }
-}
-
-function hover(obj)
-{
-    if(!s)
-    {
-        document.getElementById(obj.id).style.cssText = `
-            border-color: cyan;
-            border-width: 5px;
-        `
-    }
-}
-
-function leave(obj)
-{
-    if(!s)
-    {
-        document.getElementById(obj.id).style.cssText = `
-            border-color: black;
-            border-width: 3px;
-        `
     }
 }
 

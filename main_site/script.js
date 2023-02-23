@@ -1,4 +1,4 @@
-var domain='10.214.93.207'
+var domain='192.168.11.107'
 var ws;
 
 /*if(!(navigator.userAgent.match(/firefox/i)))
@@ -114,21 +114,25 @@ async function spawn_buttons(a,b,c,d)
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
+    opacity: 0;
         `
     document.getElementById("b").style.cssText = `
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
+    opacity: 0;
     `
     document.getElementById("c").style.cssText = `
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
+    opacity: 0;
     `
     document.getElementById("d").style.cssText = `
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
+    opacity: 0;
     `
     document.getElementById("a").innerText = `${a}`;
     document.getElementById("b").innerText = `${b}`;
@@ -136,6 +140,15 @@ async function spawn_buttons(a,b,c,d)
     document.getElementById("d").innerText = `${d}`;
 
     document.getElementById("buttons").style.opacity = "1";
+
+    await sleep(1000);
+    document.getElementById("a").style.opacity = "1";
+    await sleep(1000);
+    document.getElementById("b").style.opacity = "1";
+    await sleep(1000);
+    document.getElementById("c").style.opacity = "1";
+    await sleep(1000);
+    document.getElementById("d").style.opacity = "1";
 }
 
 async function update_profile(a,b,c)
@@ -146,19 +159,19 @@ async function update_profile(a,b,c)
 
     if(b=="d")
     {
-        document.getElementById("group").innerText = `Group: Top 5`;
+        document.getElementById("group").innerText = `Rank: Top 5`;
     }
     else if(b=="c")
     {
-        document.getElementById("group").innerText = `Group: Top 15`;
+        document.getElementById("group").innerText = `Rank: Top 15`;
     }
     else if(b=="b")
     {
-        document.getElementById("group").innerText = `Group: Top 30`;
+        document.getElementById("group").innerText = `Rank: Top 30`;
     }
     else if(b=="a")
     {
-        document.getElementById("group").innerText = `Group: Top 60-80`;
+        document.getElementById("group").innerText = `Rank: Top 60-80`;
     }
         
     document.getElementById("score").innerText = `Score: ${c}`;
@@ -238,6 +251,14 @@ async function advance()
     get_profile_v2();
 }
 
+function reset_op()
+{
+    document.getElementById("a").style.opacity = "0";
+    document.getElementById("b").style.opacity = "0";
+    document.getElementById("c").style.opacity = "0";
+    document.getElementById("d").style.opacity = "0";
+}
+
 function connect_all()
 {
     xhr = new XMLHttpRequest();
@@ -279,6 +300,7 @@ function connect_all()
                 if(j.command == "go")
                 {
                     question = j.question;
+                    reset_op();
                     get_question();
                 }
                 else if(j.command == "start")

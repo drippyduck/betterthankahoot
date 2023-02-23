@@ -97,7 +97,9 @@
     border-radius: 15px;
     border-width: 5px;
     height: 25%;
-    margin: 10px;
+    margin-bottom: 10%;
+    margin-left: 45%;
+    width: 300%;
     text-align: center;
 }
 
@@ -109,23 +111,23 @@
 #rate_a
 {
     background-color: red;
-    width: 43%;
+    opacity: 0;
 }
 
 #rate_b
 {
     background-color: blue;
-    width: 43%;
+    opacity: 0;
 }
 
 #rate_c
 {
     background-color: yellow;
-    width: 43%;
+    opacity: 0;
 }
 
 #rate_d
 {
     background-color: green;
-    width: 43%;
+    opacity: 0;
 }
