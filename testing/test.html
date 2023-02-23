@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function test()
+        {
+            xhr = new XMLHttpRequest();
+            xhr.open("GET", `http://192.168.11.110:8000/api/getLeaderboard?group=a`, true);
+        xhr.send();
+
+        xhr.onload = async function()
+        {
+
+            var l = JSON.parse(xhr.responseText);
+            document.getElementById("test").innerText = l.length;
+
+            for (let step = 0; step < l.length; step++)
+            {
+                var values = Object.values(l[step][1]);
+
+                var name = values[0];
+                var score = values[1];
+
+                alert(name);
+            } 
+
+        }
+        }
+    </script>
+    <button onclick="test()">test</button>
+    <h1 id="test"></h1>
+</body>
+</html>

@@ -104,7 +104,7 @@ async function spawn_buttons(a,b,c,d)
 
 function spawn_fireworks()
 {
-    document.getElementById("f1").style.display = `grid`;
+    document.getElementById("f1").style.display = `inline`;
 }
 
 async function update_profile(a,b,c)
@@ -166,7 +166,7 @@ async function start_timer()
     document.getElementById("t").innerText = `UP`;
     document.getElementById("timer").style.backgroundColor = "red";
 
-    await sleep(2000);
+    await sleep(1000);
 
     show_rate();
 

@@ -26,7 +26,7 @@ body
     top: 2%;
     width: 10%;
     height: 14%;
-    opacity: 1;
+    opacity: 0;
 }
 
 #main
@@ -39,7 +39,7 @@ body
     transform: translate(-50%, -50%);
     padding: 0px 40px 40px 40px;
     transition: 1.2s ease;
-    opacity: 1;
+    opacity: 0;
 }
 
 #main_title
@@ -96,7 +96,7 @@ body
 #f1
 {
     margin-left: 5%;
-    display: none;
+    display: grid;
     z-index: -100;
     grid-template-columns: auto auto auto;
 }
@@ -149,7 +149,7 @@ body
     width: 700px;
     height: 250px;
     text-align: center;
-    opacity: 1;
+    opacity: 0;
 }
 
 #main_m2

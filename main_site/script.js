@@ -114,25 +114,21 @@ async function spawn_buttons(a,b,c,d)
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
-    opacity: 0;
         `
     document.getElementById("b").style.cssText = `
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
-    opacity: 0;
     `
     document.getElementById("c").style.cssText = `
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
-    opacity: 0;
     `
     document.getElementById("d").style.cssText = `
     border-color: black;
     border-width: 5px;
     box-shadow: 5px 10px black;
-    opacity: 0;
     `
     document.getElementById("a").innerText = `${a}`;
     document.getElementById("b").innerText = `${b}`;
@@ -181,7 +177,7 @@ async function update_profile(a,b,c)
 
 function spawn_fireworks()
 {
-    document.getElementById("f1").style.display = `inline`;
+    document.getElementById("f1").style.display = `grid`;
 }
 
 // main.js part
@@ -253,6 +249,7 @@ async function advance()
 
 function reset_op()
 {
+    document.getElementById("buttons").style.opacity = "0";
     document.getElementById("a").style.opacity = "0";
     document.getElementById("b").style.opacity = "0";
     document.getElementById("c").style.opacity = "0";
@@ -320,7 +317,7 @@ function connect_all()
                     xhr.onload = async function() {
                         var resp = xhr.responseText;
                         var g = JSON.parse(resp).group;
-
+                        
                         if(g == groups[index+1])
                         {
                             advance();
@@ -462,9 +459,9 @@ function send_answer(a,obj)
     if(!s)
     {
         document.getElementById(obj.id).style.cssText = `
-            border-color: black;
-            border-width: 5px;
             box-shadow: 0 0 5px 5px #00ffff;
+            border-width: 5px;
+            opacity: 1;
         `
         s=true;
         ans=obj.id;
@@ -478,28 +475,6 @@ function send_answer(a,obj)
     xhr.send(`{"question":"${question}", "answer":"${a}", "sessionID":"${value}"}`);
 
     canAnswer=false;
-}
-
-function hover(obj)
-{
-    if(!s)
-    {
-        document.getElementById(obj.id).style.cssText = `
-            border-color: black;
-            border-width: 5px;
-        `
-    }
-}
-
-function leave(obj)
-{
-    if(!s)
-    {
-        document.getElementById(obj.id).style.cssText = `
-            border-color: black;
-            border-width: 5px;
-        `
-    }
 }
 
 function get_question()
