@@ -23,7 +23,7 @@ async function change_state()
         }
 
         xhr = new XMLHttpRequest();
-        xhr.open("GET", `http://${domain}:8000/api/checkName?name=${document.getElementById("main_input").value}`, true);
+        xhr.open("GET", `http://${domain}:8000/api/checkCode?code=${document.getElementById("main_input").value}`, true);
         xhr.send();
 
         xhr.onload = async function() {
@@ -41,7 +41,7 @@ async function change_state()
             }
             else
             {
-                document.getElementById("r2").innerText = "Name taken...";
+                document.getElementById("r2").innerText = "Invalid Code or session already active";
                 document.getElementById("m2").style.opacity = "1";
             }
         }
@@ -147,11 +147,11 @@ async function spawn_buttons(a,b,c,d)
     document.getElementById("d").style.opacity = "1";
 }
 
-async function update_profile(a,b,c)
+async function update_profile(a,a1,b,c)
 {
     document.getElementById("profile").style.opacity = "0";
 
-    document.getElementById("name").innerText = `Name: ${a}`;
+    document.getElementById("name").innerText = `Name: ${a} ${a1}`;
 
     if(b=="d")
     {
@@ -261,7 +261,7 @@ function connect_all()
     xhr = new XMLHttpRequest();
     var name = document.getElementById("main_input").value;
     xhr.open("POST", `http://${domain}:8000/api/register`, true);
-    xhr.send(`{"name":"${name}"}`);
+    xhr.send(`{"code":"${name}"}`);
     document.cookie=``;
 
     xhr.onload = function() {
@@ -411,18 +411,18 @@ function get_profile()
                 //document.getElementById("question").innerHTML = `<h1>correct</h1>`;
                 await sleep(1000);
                 await update_m2("Correct!");
-                update_profile(txt.name,txt.group,txt.score);
+                update_profile(txt.name,txt.last,txt.group,txt.score);
             }else
             {
                 //document.getElementById("question").innerHTML = `<h1>incorrect</h1>`;
                 await sleep(1000);
                 await update_m2("False!");
-                update_profile(txt.name,txt.group,txt.score);
+                update_profile(txt.name,txt.last,txt.group,txt.score);
             }
         }
         else
         {
-            update_profile(txt.name,txt.group,txt.score);
+            update_profile(txt.name,txt.last,txt.group,txt.score);
         }
 
         last_score=score;
@@ -445,7 +445,7 @@ function get_profile_v2()
         group=txt.group;
         id=txt.id;
 
-        update_profile(txt.name,txt.group,txt.score);
+        update_profile(txt.name,txt.last,txt.group,txt.score);
 
         last_score=score;
     }

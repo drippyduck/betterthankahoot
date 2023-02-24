@@ -1,0 +1,24 @@
+import pandas as pd
+import xlsxwriter
+import mysql.connector
+import sys
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="root"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("USE quiz;")
+
+def fetch_user(code):
+    mycursor.execute(f"SELECT first,last FROM players WHERE code LIKE '{code}';")
+    res = mycursor.fetchone()
+    if res:
+        return {"first":res[0],"last":res[1]}
+    else:
+        return {"first":"error","last":"error"}
+
+print(fetch_user("BC123"))

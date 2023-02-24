@@ -60,6 +60,7 @@ groups = {
 g2 = ["a","b","c","d","f"]
 
 ids = {}
+codes = []
 
 id=1
 stat=0
@@ -105,13 +106,20 @@ async def get_rows():
     res = mycursor.fetchone()
     return {"number":res}
 
+def fetch_user(code):
+    mycursor.execute(f"SELECT first,last FROM players WHERE code LIKE '{code.upper()}';")
+    res = mycursor.fetchone()
+    return {"first":res[0],"last":res[1]}
+
 @app.post("/api/register")
 async def create_cookie(request: Request):
     global id
-
     j = await request.json()
+    code = j["code"]
+    l = fetch_user(code)
+
     cookie = str(uuid.uuid4())
-    ids[cookie] = {"id":str(id),"name":j["name"],"score":0,"group":get_group()}
+    ids[cookie] = {"id":str(id),"name":l["first"],"last":l["last"],"score":0,"code":code,"group":get_group()}
     id+=1
     return {"cookie_name":"sessionID","value":f"{cookie}"}
 
@@ -119,7 +127,7 @@ async def create_cookie(request: Request):
 @app.post("/api/getProfile")
 async def send_test(request: Request):
     j = await request.json()
-    return {"id": ids[j["sessionID"]]["id"], "name": ids[j["sessionID"]]["name"], "score": ids[j["sessionID"]]["score"], "group": ids[j["sessionID"]]["group"]}
+    return {"id": ids[j["sessionID"]]["id"], "name": ids[j["sessionID"]]["name"],"last": ids[j["sessionID"]]["last"], "score": ids[j["sessionID"]]["score"], "group": ids[j["sessionID"]]["group"]}
 
 
 @app.get("/api/getQuestion")
@@ -212,17 +220,20 @@ async def get_winner(group: str):
     new = l
 
     for i in range(len(new)):
-            score = l[i][1]["score"]
-                
-            if i+1 == wanted:
-                last_score = score
-            elif i+1 > wanted and score != last_score:
-                
-                for key in ids:
-                    if ids[key]["id"] == str(l[i]):
-                        ids[key]["group"] = "l"
+            try:
+                score = l[i][1]["score"]
+                    
+                if i+1 == wanted:
+                    last_score = score
+                elif i+1 > wanted and score != last_score:
+                    
+                    for key in ids:
+                        if ids[key]["id"] == str(l[i]):
+                            ids[key]["group"] = "l"
 
-                l.remove(l[i])
+                    l.remove(l[i])
+            except:
+                pass
 
     for elem in list(l):
         winners["winners"].append(elem)
@@ -310,6 +321,7 @@ async def disconnect(request: Request):
         if elem == q:
             if ids[elem]["group"] != "f":
                 groups[ids[elem]["group"]] += 1
+            codes.remove(ids[elem]["code"])
             del ids[elem]
 
     return {"success":"true"}
@@ -324,6 +336,18 @@ async def get_user(name: str):
             return {"success":"false"}
 
     return {"success":"true"}
+
+@app.get("/api/checkCode")
+async def check_code(code: str):
+    global codes
+
+    mycursor.execute(f"SELECT first,last FROM players WHERE code LIKE '{code.upper()}';")
+    res = mycursor.fetchone()
+    if res and code not in codes:
+        codes.append(code)
+        return {"success":"true"}
+    else:  
+        return {"success":"false"}
 
 @app.get("/api/getUser")
 async def get_user(id: str):
