@@ -43,6 +43,50 @@
     padding-top: 27%;
 }
 
+#ranks h1
+{
+    background: url("https://dejpknyizje2n.cloudfront.net/marketplace/products/ad95b6799992455d96e67612121f005a.png");
+    background-size: 100% 100%;
+    width: 10%;
+    height: 100px;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#ranks
+{
+    margin-top: 10%;
+    display: default;
+}
+
+.classement
+{
+    display: grid;
+    grid-template-columns: auto 100px;
+    margin-left: 50%;
+    scale: 1.5;
+    margin-top: 3px;
+}
+
+.classement h2
+{
+    position: absolute;
+    padding-left: 11%;
+    padding-top: 10px;
+    font-family: 'Bungee', cursive;
+    color: red;
+    border: solid;
+    border-width: 5px;
+    border-color: black;
+    border-radius: 10px;
+    background-color: wheat;
+    width: 35%;
+    z-index: -600;
+    margin-left: 15px;
+    margin-top: 35px;
+}
+
 #winner
 {
     background: url("http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/27baf734c77bbd0.png");

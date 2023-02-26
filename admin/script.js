@@ -443,6 +443,7 @@ function show_board_final()
     xhr = new XMLHttpRequest();
     xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${groups[index]}`, true);
     xhr.send();
+    var list = [];
 
     xhr.onload = async function()
     {
@@ -480,20 +481,29 @@ function show_board_final()
             var score = values[1];
             var g = values[2];
 
+            list.push(name);
+
             if(g=="f")
             {
                 winner=name;
             }
 
-            document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
-
         }
 
         if(winner)
         {
+            for (let step = 0; step < 5; step++) 
+            {
+                document.getElementById("ranks").innerHTML += `
+                <div class="classement">
+                    <h1>${step+1}</h1>
+                    <h2>${list[step]}</h2>
+                </div>`
+            }
             await update_m2(`The winner is: `);
-            document.getElementById(`winner`).innerText = `${winner}`;
-            document.getElementById(`winner`).style.display = `inline`;
+            //document.getElementById(`winner`).innerText = `${winner}`;
+            //document.getElementById(`winner`).style.display = `inline`;
+            document.getElementById("ranks").style.opacity = `1`;
             spawn_fireworks();
         }
         else

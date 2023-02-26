@@ -96,7 +96,7 @@ body
 #f1
 {
     margin-left: 5%;
-    display: grid;
+    display: none;
     z-index: -100;
     grid-template-columns: auto auto auto;
 }

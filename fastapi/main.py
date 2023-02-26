@@ -59,7 +59,12 @@ groups = {
 
 g2 = ["a","b","c","d","f"]
 
-ids = {}
+ids = {"test1":{"id":"40","name":"test1","last":"tester1","score":0,"code":"111111","group":"a"},
+       "test2":{"id":"41","name":"test2","last":"tester2","score":10,"code":"111111","group":"a"},
+       "test3":{"id":"42","name":"test3","last":"tester3","score":20,"code":"111111","group":"a"},
+       "test4":{"id":"43","name":"test4","last":"tester4","score":30,"code":"111111","group":"a"},
+       "test5":{"id":"44","name":"test5","last":"tester5","score":40,"code":"111111","group":"a"}}
+
 codes = []
 
 id=1
@@ -218,9 +223,9 @@ async def get_winner(group: str):
 
     l = sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
     new = l
+    next = []
 
     for i in range(len(new)):
-            try:
                 score = l[i][1]["score"]
                     
                 if i+1 == wanted:
@@ -231,9 +236,10 @@ async def get_winner(group: str):
                         if ids[key]["id"] == str(l[i]):
                             ids[key]["group"] = "l"
 
-                    l.remove(l[i])
-            except:
-                pass
+                    next.append(l[i])
+
+    for elem in next:
+        l.remove(elem)
 
     for elem in list(l):
         winners["winners"].append(elem)
@@ -244,7 +250,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "f"
-                    ids[elem]["score"] = 0
+                    #ids[elem]["score"] = 0
 
     elif( group=="c" and len(list(l)) <= 5):
 
@@ -252,7 +258,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "d"
-                    ids[elem]["score"] = 0
+                    #ids[elem]["score"] = 0
 
     elif( group=="b" and len(list(l)) <= 15):
 
@@ -260,7 +266,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "c"
-                    ids[elem]["score"] = 0
+                    #ids[elem]["score"] = 0
 
     elif( group=="a" and len(list(l)) <= 30):
 
@@ -268,7 +274,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "b"
-                    ids[elem]["score"] = 0
+                    #ids[elem]["score"] = 0
                 
     
     return winners

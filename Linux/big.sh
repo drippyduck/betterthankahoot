@@ -7,6 +7,6 @@
 xterm -e "./api.sh $1" &
 sleep 10
 xterm -e "./socket.sh $1" &
-xterm -e "./user.sh" &
-xterm -e "./admin.sh" &
+xterm -e "./user.sh $1" &
+xterm -e "./admin.sh $1" &
 
