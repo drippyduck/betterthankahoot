@@ -444,6 +444,7 @@ function show_board_final()
     xhr.open("GET", `http://${domain}:8000/api/getLeaderboard?group=${groups[index]}`, true);
     xhr.send();
     var list = [];
+    var list2 = [];
 
     xhr.onload = async function()
     {
@@ -478,33 +479,41 @@ function show_board_final()
             var values = Object.values(l[step][1]);
 
             var name = values[0];
-            var score = values[1];
-            var g = values[2];
-
-            list.push(name);
+            var last = values[1];
+            var score = values[2];
+            var g = values[3];
 
             if(g=="f")
             {
                 winner=name;
+            }
+            else
+            {
+                list.push(name);
+                list2.push(last);
             }
 
         }
 
         if(winner)
         {
-            for (let step = 0; step < 5; step++) 
+            for (let step = 0; step < 4; step++) 
             {
                 document.getElementById("ranks").innerHTML += `
                 <div class="classement">
-                    <h1>${step+1}</h1>
-                    <h2>${list[step]}</h2>
+                    <h1>${step+2}</h1>
+                    <h2>${list[step]} ${list2[step]}</h2>
                 </div>`
             }
             await update_m2(`The winner is: `);
-            //document.getElementById(`winner`).innerText = `${winner}`;
-            //document.getElementById(`winner`).style.display = `inline`;
-            document.getElementById("ranks").style.opacity = `1`;
             spawn_fireworks();
+            document.getElementById("ranks").style.opacity = `1`;
+            await sleep(9000);
+            document.getElementById("ranks").style.opacity = `0`;
+            await sleep(1000);
+            document.getElementById(`winner`).innerText = `${winner}`;
+            document.getElementById(`winner`).style.opacity = `1`;
+            
         }
         else
         {

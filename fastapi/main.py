@@ -187,9 +187,10 @@ async def get_rate(group: str):
             id = ids[elem]["id"]
             score = ids[elem]["score"]
             name = ids[elem]["name"]
+            last = ids[elem]["last"]
             group = ids[elem]["group"]
 
-            l[id] = {"name":name,"score":score,"group":group}
+            l[id] = {"name":name,"last":last,"score":score,"group":group}
 
     return sorted(l.items(), key=lambda x: x[1]["score"], reverse=True)
 

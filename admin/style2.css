@@ -56,8 +56,8 @@
 
 #ranks
 {
-    margin-top: -850px;
-    margin-right: 13%;
+    margin-top: -790px;
+    margin-right: 7%;
     opacity: 0;
     z-index: -10000;
 }
@@ -67,7 +67,7 @@
     display: grid;
     grid-template-columns: auto 100px;
     margin-left: 50%;
-    scale: 1.2;
+    scale: 1.4;
     margin-top: 3px;
 }
 
@@ -103,7 +103,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    display: none;
+    opacity: 0;
+    z-index: 50000;
     transform: translate(-50%, -50%);
 }
 

@@ -97,7 +97,7 @@ body
 {
     margin-left: 5%;
     display: none;
-    z-index: -100;
+    z-index: -300000;
     grid-template-columns: auto auto auto;
 }
 
