@@ -10,7 +10,7 @@ body
 {
     overflow-x: hidden;
     overflow-y: hidden;
-    background-image: url('https://i.pinimg.com/originals/1d/26/c5/1d26c5b022c071fb8f1e3ae2f0f65ba9.gif');
+    background-image: url('./assets/bg.gif');
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;

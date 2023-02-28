@@ -36,7 +36,7 @@
 
 .item{
     transition: .25s ease;
-    background: url("https://static.vecteezy.com/system/resources/thumbnails/013/442/187/small/illustration-of-pixel-cloud-icon-png.png");
+    background: url("./assets/cloud.webp");
     background-size: 100% 100%;
     height: 80%;
     text-align: center;
@@ -45,7 +45,7 @@
 
 #ranks h1
 {
-    background: url("https://dejpknyizje2n.cloudfront.net/marketplace/products/ad95b6799992455d96e67612121f005a.png");
+    background: url("./assets/medal.png");
     background-size: 100% 100%;
     width: 10%;
     height: 100px;
@@ -91,7 +91,7 @@
 
 #winner
 {
-    background: url("http://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/27baf734c77bbd0.png");
+    background: url("./assets/throne.png");
     background-size: 100% 100%;
     width: 20%;
     height: 300px;
