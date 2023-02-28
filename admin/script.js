@@ -154,7 +154,7 @@ function sleep (time) {
 async function start_timer()
 {
     var max = 10;
-    document.getElementById("timer").style.backgroundColor = "green";
+    document.getElementById("timer").style.backgroundColor = "lime";
 
     for (let step = 0; step < max; step++) 
     {

@@ -190,7 +190,7 @@ body
 
 #b
 {
-    background-color: blue;
+    background-color: deepskyblue;
     opacity: 0;
 }
 
@@ -202,7 +202,7 @@ body
 
 #d
 {
-    background-color: green;
+    background-color: lime;
     opacity: 0;
 }
 
@@ -214,13 +214,18 @@ body
     top: 7%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 15px;
+    border-radius: 50%;
     width: 100px;
-    height: 70px;
+    height: 100px;
     text-align: center;
     vertical-align: middle;
     background-color: lightblue;
     opacity: 0;
+}
+
+#t
+{
+    font-size: 4.5vh;
 }
 
 #reset

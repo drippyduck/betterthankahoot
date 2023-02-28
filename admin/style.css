@@ -166,7 +166,7 @@ body
 
 #b
 {
-    background-color: blue;
+    background-color: deepskyblue;
     opacity: 0;
     transition: .4s ease;
 }
@@ -180,7 +180,7 @@ body
 
 #d
 {
-    background-color: green;
+    background-color: lime;
     opacity: 0;
     transition: .4s ease;
 }
@@ -190,16 +190,22 @@ body
     border: solid;
     border-color: black;
     position: absolute;
-    top: 7%;
+    top: 9%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 15px;
-    width: 100px;
-    height: 70px;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
     text-align: center;
     vertical-align: middle;
     background-color: lightblue;
     opacity: 0;
+    padding-bottom: 100px;
+}
+
+#t
+{
+    font-size: 5vh;
 }
 
 #reset
