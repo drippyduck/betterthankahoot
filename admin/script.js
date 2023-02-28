@@ -146,6 +146,10 @@ var winner = '';
 var users = [];
 var groups = ["a","b","c","d"]
 var index=0;
+var correct_audio = new Audio('./audio/correct.mp3');
+var final_audio = new Audio('./audio/final.mp3');
+var timer_audio = new Audio('./audio/timer.mp3');
+var end_audio = new Audio('./audio/bell.mp3');
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -153,6 +157,11 @@ function sleep (time) {
 
 async function start_timer()
 {
+    timer_audio.currentTime=0;
+    end_audio.currentTime=0;
+    
+    timer_audio.play();
+
     var max = 10;
     document.getElementById("timer").style.backgroundColor = "lime";
 
@@ -165,6 +174,9 @@ async function start_timer()
 
     document.getElementById("t").innerText = `UP`;
     document.getElementById("timer").style.backgroundColor = "red";
+    timer_audio.pause();
+
+    end_audio.play();
 
     await sleep(2000);
 
@@ -237,6 +249,7 @@ function connect_all()
                 }
                 else if(j.command == "final")
                 {
+                    final_audio.play();
                     show_board_final();
                 }
             }
@@ -302,6 +315,7 @@ function show_rate()
 
         document.getElementById("message").style.opacity = "0";
         document.getElementById("buttons").style.opacity = "0";
+        document.getElementById("timer").style.opacity = "0";
 
         await sleep(500);
         document.getElementById("rates").style.opacity = `1`;
@@ -309,6 +323,8 @@ function show_rate()
         document.getElementById("rate_b").style.opacity = `1`;
         document.getElementById("rate_c").style.opacity = `1`;
         document.getElementById("rate_d").style.opacity = `1`;
+
+        correct_audio.play();
   
     }
 }
