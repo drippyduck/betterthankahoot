@@ -144,7 +144,7 @@ var s=false;
 var ans=0;
 var winner = '';
 var users = [];
-var groups = ["a","b","c","d"]
+var groups = ["a","b","c","d","f"]
 var index=0;
 var correct_audio = new Audio('./audio/correct.mp3');
 var final_audio = new Audio('./audio/final.mp3');
@@ -359,6 +359,8 @@ function show_board()
         var l = JSON.parse(xhr.responseText);
         var s=l.length;
         var check=false;
+        var n_list = [];
+        var n_next_list = [];
 
         document.getElementById("group").innerHTML = ``;
 
@@ -368,24 +370,39 @@ function show_board()
 
             var name = values[0];
             var score = values[1];
-            var g = values[2];
+            var g = values[3];
 
-            if(g==groups[index])
+            if(g==groups[index+1])
             {
                 check=true;
+                n_next_list.push(name);
+            }
+            else if(g==groups[index])
+            {
+                n_list.push(name);
             }
 
-            document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
+            //document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
 
         }
 
-        if(!check)
+        if(check)
         {
+            for(let step=0; step<n_next_list.length; step++)
+            {
+                document.getElementById(`group`).innerHTML += `<h3 class="item">${n_next_list[step]}</h3>`;
+            }
+
             await update_m2(`Moving to the next round`);
             index+=1;
         }
         else
         {
+            for(let step=0; step<n_list.length; step++)
+            {
+                document.getElementById(`group`).innerHTML += `<h3 class="item">${n_list[step]}</h3>`;
+            }
+
             await update_m2(`Waiting for additional questions...`);
         }
 

@@ -155,6 +155,7 @@ def get_reset():
 
     groups = {"a":n_per_group,"b":0,"c":0,"d":0}
     ids={}
+    codes.clear()
     id=1
 
     return {"success":"true"}
@@ -202,7 +203,7 @@ async def get_winner(group: str):
     winners={"winners":[]}
 
     if group == "a":
-        wanted = 30
+        wanted = 5
     elif group == "b":
         wanted = 15
     elif group == "c":
@@ -269,7 +270,7 @@ async def get_winner(group: str):
                     ids[elem]["group"] = "c"
                     #ids[elem]["score"] = 0
 
-    elif( group=="a" and len(list(l)) <= 30):
+    elif( group=="a" and len(list(l)) <= 5):
 
         for elem in ids:
             for e in list(l):
