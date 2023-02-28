@@ -158,6 +158,7 @@ def input_loop():
                                     basic["command"] = "win"
 
                                 WORD = str(basic)
+                                ready = False
 
                             else:
 
