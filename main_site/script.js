@@ -351,11 +351,15 @@ function connect_all()
                             //await sleep(10000);
                             //window.location.reload();
                         }
-                        else
+                        else if(g=="l")
                         {
                             await update_m2("Lost final!");
                             await sleep(10000);
                             window.location.reload();
+                        }
+                        else
+                        {
+                            await update_m2("Waiting for additional questions...");
                         }
                     }
                 }

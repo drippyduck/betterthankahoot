@@ -59,11 +59,13 @@ groups = {
 
 g2 = ["a","b","c","d","f"]
 
-ids = {"test1":{"id":"40","name":"test1","last":"tester1","score":0,"code":"111111","group":"a"},
+ids2 = {"test1":{"id":"40","name":"test1","last":"tester1","score":0,"code":"111111","group":"a"},
        "test2":{"id":"41","name":"test2","last":"tester2","score":10,"code":"111111","group":"a"},
        "test3":{"id":"42","name":"test3","last":"tester3","score":20,"code":"111111","group":"a"},
        "test4":{"id":"43","name":"test4","last":"tester4","score":30,"code":"111111","group":"a"},
        "test5":{"id":"44","name":"test5","last":"tester5","score":40,"code":"111111","group":"a"}}
+
+ids = {"test1":{"id":"40","name":"test1","last":"tester1","score":0,"code":"111111","group":"a"}}
 
 codes = []
 
@@ -203,7 +205,7 @@ async def get_winner(group: str):
     winners={"winners":[]}
 
     if group == "a":
-        wanted = 5
+        wanted = 30
     elif group == "b":
         wanted = 15
     elif group == "c":
@@ -235,7 +237,7 @@ async def get_winner(group: str):
                 elif i+1 > wanted and score != last_score:
                     
                     for key in ids:
-                        if ids[key]["id"] == str(l[i]):
+                        if ids[key]["id"] == str(l[i][0]):
                             ids[key]["group"] = "l"
 
                     next.append(l[i])
@@ -270,7 +272,7 @@ async def get_winner(group: str):
                     ids[elem]["group"] = "c"
                     #ids[elem]["score"] = 0
 
-    elif( group=="a" and len(list(l)) <= 5):
+    elif( group=="a" and len(list(l)) <= 30):
 
         for elem in ids:
             for e in list(l):

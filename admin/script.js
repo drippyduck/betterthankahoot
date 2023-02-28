@@ -249,7 +249,6 @@ function connect_all()
                 }
                 else if(j.command == "final")
                 {
-                    final_audio.play();
                     show_board_final();
                 }
             }
@@ -318,13 +317,16 @@ function show_rate()
         document.getElementById("timer").style.opacity = "0";
 
         await sleep(500);
+        
+        correct_audio.play();
+
         document.getElementById("rates").style.opacity = `1`;
         document.getElementById("rate_a").style.opacity = `1`;
         document.getElementById("rate_b").style.opacity = `1`;
         document.getElementById("rate_c").style.opacity = `1`;
         document.getElementById("rate_d").style.opacity = `1`;
 
-        correct_audio.play();
+        
   
     }
 }
@@ -516,6 +518,8 @@ function show_board_final()
             var score = values[2];
             var g = values[3];
 
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
+
             if(g=="f")
             {
                 winner=name;
@@ -538,6 +542,7 @@ function show_board_final()
                     <h2>${list[step]} ${list2[step]}</h2>
                 </div>`
             }
+            final_audio.play();
             await update_m2(`The winner is: `);
             spawn_fireworks();
             document.getElementById("ranks").style.opacity = `1`;

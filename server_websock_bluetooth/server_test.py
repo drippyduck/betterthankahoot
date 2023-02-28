@@ -92,24 +92,6 @@ def input_loop():
 
         if c == "0" and not ready:
 
-            if index >= len(GROUPS):
-                reset()
-
-                basic["command"] = "ready"
-                basic["group"] = GROUPS[index]
-                WORD=str(basic)
-
-                print(f"Current Group: {GROUPS[index]}")
-
-                if GROUPS[index] == "d":
-                    add_question(final_q)
-                else:
-                    add_question(question_per_round)
-
-                ready=True
-                answered=True
-
-            else:
                 basic["command"] = "ready"
                 basic["group"] = GROUPS[index]
                 WORD=str(basic)
@@ -119,6 +101,7 @@ def input_loop():
                 add_question(question_per_round)
 
                 ready=True
+                answered=True
 
         elif c == "4":
             reset()
@@ -148,7 +131,7 @@ def input_loop():
 
                             #print(f"{w} : {len(w)}")
                             
-                            if (len(w) > 5 and GROUPS[index] == "a") or (len(w) > 15 and GROUPS[index] == "b") or (len(w) > 5 and GROUPS[index] == "c") or (len(w) > 1 and GROUPS[index] == "d"):
+                            if (len(w) > 30 and GROUPS[index] == "a") or (len(w) > 15 and GROUPS[index] == "b") or (len(w) > 5 and GROUPS[index] == "c") or (len(w) > 1 and GROUPS[index] == "d"):
                                 print("More questions!!")
                                 add_question(1)
 
@@ -158,7 +141,7 @@ def input_loop():
                                     basic["command"] = "win"
 
                                 WORD = str(basic)
-                                ready = False
+                                ready=True
 
                             else:
 
