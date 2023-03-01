@@ -30,8 +30,8 @@
     height: 100%;
     display: inline-grid;
     border-width: 5px;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;
-    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
 }
 
 .item{
@@ -40,7 +40,8 @@
     background-size: 100% 100%;
     height: 80%;
     text-align: center;
-    padding-top: 27%;
+    vertical-align: middle;
+    padding-top: 50px;
 }
 
 #ranks h1
@@ -66,7 +67,7 @@
 {
     display: grid;
     grid-template-columns: auto 100px;
-    margin-left: 50%;
+    margin-left: 40%;
     scale: 1.4;
     margin-top: 3px;
 }
@@ -83,7 +84,7 @@
     border-color: black;
     border-radius: 10px;
     background-color: wheat;
-    width: 35%;
+    width: 60%;
     z-index: -600;
     margin-left: 15px;
     margin-top: 35px;

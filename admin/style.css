@@ -22,10 +22,10 @@ body
 {
     z-index: 100;
     position: absolute;
-    left: 2%;
-    top: 2%;
-    width: 10%;
-    height: 14%;
+    left: 1%;
+    top: 1%;
+    width: 250px;
+    height: 150px;
     opacity: 1;
 }
 
@@ -200,7 +200,8 @@ body
     vertical-align: middle;
     background-color: lightblue;
     opacity: 0;
-    padding-bottom: 100px;
+    padding-top: 10px;
+    border-width: 5px;
 }
 
 #t

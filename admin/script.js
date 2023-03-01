@@ -371,17 +371,17 @@ function show_board()
             var values = Object.values(l[step][1]);
 
             var name = values[0];
-            var score = values[1];
+            var last = values[1];
             var g = values[3];
 
             if(g==groups[index+1])
             {
                 check=true;
-                n_next_list.push(name);
+                n_next_list.push(name.concat(" ", last));
             }
             else if(g==groups[index])
             {
-                n_list.push(name);
+                n_list.push(name.concat(" ", last));
             }
 
             //document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
@@ -518,7 +518,7 @@ function show_board_final()
             var score = values[2];
             var g = values[3];
 
-            document.getElementById(`group`).innerHTML += `<h3 class="item">${name}</h3>`;
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${name.concat(" ",last)}</h3>`;
 
             if(g=="f")
             {
@@ -576,13 +576,16 @@ function show_names(c)
         for (let step = 0; step < c-1; step++) 
         {
             n = l[`${step}`].name;
+            last = l[`${step}`].last;
             g = l[`${step}`].group;
 
-            if(!(users.includes(n))){
-                users.push(n);
+            full = n.concat(" ", last);
+
+            if(!(users.includes(full))){
+                users.push(full);
             }
 
-            document.getElementById(`group`).innerHTML += `<h3 class="item">${n}</h3>`;
+            document.getElementById(`group`).innerHTML += `<h3 class="item">${full}</h3>`;
         }
         
     }
