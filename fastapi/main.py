@@ -255,7 +255,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "f"
-                    #ids[elem]["score"] = 0
+                    ids[elem]["score"] = 0
 
     elif( group=="c" and len(list(l)) <= 5):
 
@@ -263,7 +263,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "d"
-                    #ids[elem]["score"] = 0
+                    ids[elem]["score"] = 0
 
     elif( group=="b" and len(list(l)) <= 15):
 
@@ -271,7 +271,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "c"
-                    #ids[elem]["score"] = 0
+                    ids[elem]["score"] = 0
 
     elif( group=="a" and len(list(l)) <= 30):
 
@@ -279,7 +279,7 @@ async def get_winner(group: str):
             for e in list(l):
                 if ids[elem]["id"] == e[0]:
                     ids[elem]["group"] = "b"
-                    #ids[elem]["score"] = 0
+                    ids[elem]["score"] = 0
                 
     
     return winners

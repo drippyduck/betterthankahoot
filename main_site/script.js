@@ -1,12 +1,12 @@
 var domain='192.168.11.110'
 var ws;
 
-/*if(!(navigator.userAgent.match(/firefox/i)))
+if(!(navigator.userAgent.match(/firefox|chrome|opera/i)))
 {
-    //update_m2('Please use a firefox or safari browser!');
-    //document.getElementById("main").style.display = "none";
-    //document.getElementById("main").style.top = "250%";
-}*/
+    update_m2('Please use a firefox or chrome browser!');
+    document.getElementById("main").style.display = "none";
+    document.getElementById("main").style.top = "250%";
+}
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -206,7 +206,7 @@ function sleep (time) {
 async function start_timer()
 {
     var max = 10;
-    document.getElementById("timer").style.backgroundColor = "lime";
+    document.getElementById("timer").style.color = "lime";
 
     for (let step = 0; step < max; step++) 
     {
@@ -216,7 +216,7 @@ async function start_timer()
     }
 
     document.getElementById("t").innerText = `UP`;
-    document.getElementById("timer").style.backgroundColor = "red";
+    document.getElementById("timer").style.color = "red";
     score=0;
     selected=1;
     canAnswer = false;
@@ -507,7 +507,7 @@ function get_question()
         await sleep(1000);
         spawn_buttons(obj.a,obj.b,obj.c,obj.d);
         document.getElementById("t").innerText = `10`;
-        document.getElementById("timer").style.backgroundColor = "lightblue";
+        document.getElementById("timer").style.color = "black";
         await sleep(500);
         document.getElementById("timer").style.opacity = "1";
     }

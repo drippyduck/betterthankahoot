@@ -208,24 +208,19 @@ body
 
 #timer
 {
-    border: solid;
-    border-color: black;
     position: absolute;
-    top: 7%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
     text-align: center;
     vertical-align: middle;
-    background-color: lightblue;
     opacity: 0;
+    color: black;
 }
 
 #t
 {
-    font-size: 4.5vh;
+    font-size: 8vh;
 }
 
 #reset
