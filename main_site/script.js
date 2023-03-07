@@ -1,12 +1,5 @@
-var domain='192.168.11.110'
+var domain='192.168.238.106'
 var ws;
-
-if(!(navigator.userAgent.match(/firefox|chrome|opera/i)))
-{
-    update_m2('Please use a firefox or chrome browser!');
-    document.getElementById("main").style.display = "none";
-    document.getElementById("main").style.top = "250%";
-}
 
 function sleep (time) {
     return new Promise((resolve) => setTimeout(resolve, time));
@@ -538,3 +531,7 @@ window.addEventListener('beforeunload', async (event)=>{
         return 'Disconnecting';
     }
 })
+
+window.addEventListener('native.showkeyboard', async (event)=>{
+    alert(1);
+});

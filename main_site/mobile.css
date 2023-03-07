@@ -232,6 +232,7 @@ body
     font-size: 2vh;
     top: 95%;
     font-family: 'Changa One', cursive;
+    color: black;
 }
 
 #reset:hover
