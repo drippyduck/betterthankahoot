@@ -1,6 +1,7 @@
 import websockets, threading, asyncio
 from queue import Queue
 import random, sys, requests, os, json, time
+import mysql.connector
 
 q = Queue()
 
@@ -18,11 +19,38 @@ domain=sys.argv[1]
 limit = int(str(json.loads(requests.get(f"http://{domain}:8000/api/getRows").text)["number"])[1:-1])
 questions = []
 
+mydb = mysql.connector.connect(host="localhost",user="root",password="root")
+
+mycursor = mydb.cursor()
+
+mycursor.execute("USE quiz;")
+
 basic = {
     "command":"",
     "question":""
 }
 
+def add_question(r):
+    global q
+    global questions
+    l=[]
+    i = 0
+
+    mycursor.execute(f"SELECT id FROM questions WHERE category = '{GROUPS[index]}';")
+
+    for elem in mycursor.fetchall():
+        l.append(str(elem[0]))
+
+    print("Questions: "+str(l))
+
+    while i<r:
+        elem = str(random.choice(l))
+
+        if elem not in questions:
+            print(f"Added question {elem}")
+            q.put(elem)
+            questions.append(elem)
+            i+=1
 
 def reset():
     global WORD
@@ -55,24 +83,14 @@ def reset():
     questions.clear()
 
 
-def add_question(r):
-    global q
-    global questions
-
-    i = 0
-
-    while i<r:
-        elem = str(random.randint(1,limit))
-
-        if elem not in questions:
-            print(f"Added question {elem}")
-            q.put(elem)
-            questions.append(elem)
-            i+=1
-
 def start_timer():
+    global sent
+    global answered
+    
     requests.get(f"http://{domain}:8000/api/startTimer")
     print("FInished timwer")
+    sent=False
+    answered=True
 
 def input_loop():
     global WORD
@@ -181,8 +199,6 @@ def input_loop():
 
                         time.sleep(1)
                         threading.Thread(target=start_timer).start()
-                        sent=False
-                        answered=True
 
                 else:
                     print("Not ready!")

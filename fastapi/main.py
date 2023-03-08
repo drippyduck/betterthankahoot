@@ -65,7 +65,8 @@ ids2 = {"test1":{"id":"40","name":"test1","last":"tester1","score":0,"code":"111
        "test4":{"id":"43","name":"test4","last":"tester4","score":30,"code":"111111","group":"a"},
        "test5":{"id":"44","name":"test5","last":"tester5","score":40,"code":"111111","group":"a"}}
 
-ids = {"test1":{"id":"40","name":"ewq123ewq","last":"alewq123ewq123","score":0,"code":"111111","group":"a"}}
+ids = {"test1":{"id":"40","name":"ewq123ewq","last":"alewq123ewq123","score":0,"code":"111111","group":"a"},
+       "test2":{"id":"41","name":"ewq123ewq","last":"alewq123ewq123","score":0,"code":"111112","group":"a"}}
 
 codes = []
 

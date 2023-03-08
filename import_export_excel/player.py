@@ -48,8 +48,6 @@ def generate_code():
 
     return code
 
-print(generate_code())
-
 def leave():
     print("Usage: python $PATH$/main.py export|import $filename$.xlsx")
     exit(0)
@@ -60,7 +58,7 @@ def insert_player(first,last):
 
 def import_file(file):
     data = pd.read_excel(fr'{file}')
-    df = pd.DataFrame(data, columns=['first', 'last', 'code'])
+    df = pd.DataFrame(data, columns=['first', 'last'])
 
     count = 0
 
@@ -108,7 +106,7 @@ def export_file(file):
 # ALTER TABLE table_name AUTO_INCREMENT = value;
 # reset inc value ( value == next value of inc )
 
-"""
+
 if len(sys.argv) < 3:
     leave()
 else:
@@ -119,4 +117,3 @@ else:
             export_file(sys.argv[2])
     else:
         leave()
-"""

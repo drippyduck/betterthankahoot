@@ -19,13 +19,13 @@ def leave():
     print("Usage: python $PATH$/main.py export|import $filename$.xlsx")
     exit(0)
 
-def insert_question(content,a,b,c,d,answer):
-    mycursor.execute(f"INSERT INTO `questions`(`content`, `a`, `b`, `c`, `d`, `answer`) VALUES ('{str(content)}','{str(a)}','{str(b)}','{str(c)}','{str(d)}','{str(answer)}');")
+def insert_question(content,a,b,c,d,answer,category):
+    mycursor.execute(f"INSERT INTO `questions`(`content`, `a`, `b`, `c`, `d`, `answer`, `category`) VALUES ('{str(content)}','{str(a)}','{str(b)}','{str(c)}','{str(d)}','{str(answer)}','{str(category)}');")
     mydb.commit()
 
 def import_file(file):
     data = pd.read_excel(fr'{file}')
-    df = pd.DataFrame(data, columns=['content', 'a', 'b', 'c', 'd', 'answer'])
+    df = pd.DataFrame(data, columns=['content', 'a', 'b', 'c', 'd', 'answer', 'category'])
 
     count = 0
 
@@ -37,7 +37,7 @@ def import_file(file):
             break
 
     for i in range(count):
-        insert_question(df['content'][i].replace('"',"").replace("'",""),df['a'][i],df['b'][i],df['c'][i],df['d'][i],df['answer'][i])
+        insert_question(df['content'][i].replace('"',"").replace("'",""), df['a'][i], df['b'][i], df['c'][i], df['d'][i], df['answer'][i], df['category'][i])
         
 
 def export_file(file):
@@ -54,6 +54,7 @@ def export_file(file):
     worksheet.write(row, col+3, "c")
     worksheet.write(row, col+4, "d")
     worksheet.write(row, col+5, "answer")
+    worksheet.write(row, col+6, "category")
 
     row += 1
     col = 0
@@ -68,6 +69,7 @@ def export_file(file):
         worksheet.write(row, col+3, res[4])
         worksheet.write(row, col+4, res[5])
         worksheet.write(row, col+5, res[6])
+        worksheet.write(row, col+6, res[7])
 
         col = 0
         row += 1
